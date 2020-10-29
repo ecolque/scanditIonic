@@ -1,0 +1,22 @@
+Volume Button Observer
+=====================
+
+.. module:: scandit.datacapture.core
+
+.. class:: VolumeButtonObserver
+  @objc@ SDCVolumeButtonObserver : NSObject
+  :available: ios=6.3.1
+
+    This class provides a mechanism for listening to volume button events.
+
+  .. method VolumeButtonObserver()
+    @objc@ - (instancetype)initWithHandler:(void (^)(void))volumeChanged
+    :available: ios=6.3.1
+
+    Creates a new handler for listening to volume button events. This is the designated initializer.
+
+  .. method static VolumeButtonObserver Create()
+    @objc@ + (instancetype)volumeButtonObserverWithHandler:(void (^)(void))volumeChanged
+    :available: ios=6.3.1
+
+    Creates a new handler for listening to volume button events.

@@ -1,0 +1,340 @@
+|sdk| 6.3 Release Notes (May 12th 2020)
+=======================================
+
+.. module:: scandit.datacapture.core
+  :hidden:
+
+Compatibility
+-------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5
+
+  * - Platform
+    - Minimum Version
+
+  * - Android
+    - Android 4.4 (API level 19)
+
+  * - iOS
+    - iOS 9.0 [1]
+
+  * - Cordova
+    -  - `cordova <https://www.npmjs.com/package/cordova>`_ 8.0.0
+       - `cordova-ios <https://www.npmjs.com/package/cordova-ios>`_ 4.5.5
+       - `cordova-android <https://www.npmjs.com/package/cordova-android>`_ 7.0.0
+       - iOS 10.0
+       - Android 5.0 (API level 20)
+
+  * - Xamarin.iOS
+    -  - iOS 9.0
+       - `Xamarin.iOS <https://docs.microsoft.com/en-us/xamarin/ios/release-notes/13/13.10>`_ 13.10
+
+  * - Xamarin.Android
+    - Android 4.4 (API level 19)
+
+[1] :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay` has a minimum version of iOS 10.0
+
+See also the :doc:`System Requirements</requirements>`.
+
+|
+|
+
+.. eager-ifconfig:: platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  Version 6.2 marks the initial release of |sdk| for Xamarin.iOS and Xamarin.Android. It is a major update over the 5.x Scandit SDK and introduces new APIs and additional features. This release is not compatible with 5.x and will require code changes in your application. Take a look at our :doc:`migration guide </migrate-to-6>` for how to upgrade your app from 5.x to 6.x.
+
+New Features
+------------
+
+.. eager-ifconfig:: platform == 'ios'
+
+  * Added :enum:`scandit.datacapture.barcode.Symbology.IataTwoOfFive`.
+  * Code 128 now always uses relaxed quiet zone rules. It is no longer necessary to use the relaxed quiet zone symbology extension.
+  * Added :type:`core.ImageFrameSource`. This new type of :type:`core.IFrameSource` allows to capture data inside UIImages (for example scanning barcodes in a UIImage).
+  * Introduced an experimental torch state (:enum:`core.TorchState.Auto`) that turns the torch on or off based on the current illumination.
+  * Added :type:`core.TorchListener` - a delegate to be invoked when :type:`core.TorchState` of a :type:`core.Camera` changes.
+  * The `ScanditLabelCapture` framework (containing :type:`label.LabelCapture`) no longer requires `ScanditTextCapture` (containing :type:`text.TextCapture`) as a dependency if the label to be recognized does not require any text recognition.
+  * Added :prop:`core.ui.RectangularViewfinder.DisabledColor` to set color of the viewfinder when the mode is disabled.
+  * When the shouldShowScanAreaGuides option is enabled :prop:`point of interest<core.ui.DataCaptureView.PointOfInterest>` is always drawn. When the radius for :type:`radius location selection<core.RadiusLocationSelection>` is set to 0 then a small circle is drawn.
+  * Added :prop:`core.DataCaptureContext.DeviceId` to get the unique identifier of the device.
+  * Added :type:`core.Feedback` deserialization (:meth:`~core.Feedback.FromJson`).
+  * Added :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay` deserialization (:meth:`~barcode.tracking.ui.BarcodeTrackingAdvancedOverlay.FromJson` and :meth:`~barcode.tracking.ui.BarcodeTrackingAdvancedOverlay.UpdateFromJson`).
+  * Added :type:`text.TextCapture` deserialization (:meth:`text.TextCapture.FromJson` and :meth:`text.TextCapture.UpdateFromJson`) and :type:`text.TextCaptureSettings` updating through deserialization (:meth:`text.TextCaptureSettings.UpdateFromJson`).
+  * Added :type:`text.TextCaptureFeedback` deserialization (:meth:`text.TextCaptureFeedback.FromJson`).
+  * Added :type:`parser.Parser` deserialization (:meth:`parser.Parser.FromJson` and :meth:`parser.Parser.UpdateFromJson`).
+  * DLID parser: Added the "issuer" field, its value is the ISO code of the issuing state.
+  * SwissQr parser: minimalVersion option added to the parser. The default minimal version of SwissQr codes that are parsed was changed to 2.0.
+  * MRTD parser: allowFalsePositiveCompensation option added.
+  * US Uniformed Services ID (UsUsid) parser support for PDF417 barcodes.
+
+.. eager-ifconfig:: platform == 'android'
+
+  * Added :enum:`scandit.datacapture.barcode.Symbology.IataTwoOfFive`.
+  * Code 128 now always uses relaxed quiet zone rules. It is no longer necessary to use the relaxed quiet zone symbology extension.
+  * Added :type:`core.ImageFrameSource`. This new type of :type:`core.IFrameSource` allows to capture data inside Bitmaps (for example scanning barcodes in a Bitmap).
+  * Introduced an experimental torch state (:enum:`core.TorchState.Auto`) that turns the torch on or off based on the current illumination.
+  * Added :type:`core.TorchListener` - a callback to be invoked when :type:`core.TorchState` of a :type:`core.Camera` changes.
+  * The `ScanditLabelCapture` library (containing :type:`label.LabelCapture`) no longer requires `ScanditTextCapture` (containing :type:`text.TextCapture`) as a dependency if the label to be recognized does not require any text recognition.
+  * Added :prop:`core.ui.RectangularViewfinder.DisabledColor` to set color of the viewfinder when the mode is disabled.
+  * When the shouldShowScanAreaGuides option is enabled :prop:`point of interest<core.ui.DataCaptureView.PointOfInterest>` is always drawn. When the radius for :type:`radius location selection<core.RadiusLocationSelection>` is set to 0 then a small circle is drawn.
+  * Added :prop:`core.DataCaptureContext.DeviceId` to get the unique identifier of the device.
+  * Added :type:`core.Feedback` deserialization (:meth:`~core.Feedback.FromJson`).
+  * Added :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay` deserialization (:meth:`~barcode.tracking.ui.BarcodeTrackingAdvancedOverlay.FromJson` and :meth:`~barcode.tracking.ui.BarcodeTrackingAdvancedOverlay.UpdateFromJson`).
+  * Added :type:`text.TextCapture` deserialization (:meth:`text.TextCapture.FromJson` and :meth:`text.TextCapture.UpdateFromJson`) and :type:`text.TextCaptureSettings` updating through deserialization (:meth:`text.TextCaptureSettings.UpdateFromJson`).
+  * Added :type:`text.TextCaptureFeedback` deserialization (:meth:`text.TextCaptureFeedback.FromJson`).
+  * Added :type:`parser.Parser` deserialization (:meth:`parser.Parser.FromJson` and :meth:`parser.Parser.UpdateFromJson`).
+  * DLID parser: Added the "issuer" field, its value is the ISO code of the issuing state.
+  * SwissQr parser: minimalVersion option added to the parser. The default minimal version of SwissQr codes that are parsed was changed to 2.0.
+  * MRTD parser: allowFalsePositiveCompensation option added.
+  * US Uniformed Services ID (UsUsid) parser support for PDF417 barcodes.
+
+.. eager-ifconfig:: platform == 'cordova'
+
+  * Added :enum:`scandit.datacapture.barcode.Symbology.IataTwoOfFive`.
+  * Code 128 now always uses relaxed quiet zone rules. It is no longer necessary to use the relaxed quiet zone symbology extension.
+  * Introduced an experimental torch state (:enum:`core.TorchState.Auto`) that turns the torch on or off based on the current illumination.
+  * When the shouldShowScanAreaGuides option is enabled :prop:`point of interest<core.ui.DataCaptureView.PointOfInterest>` is always drawn. When the radius for :type:`radius location selection<core.RadiusLocationSelection>` is set to 0 then a small circle is drawn.
+  * Added :prop:`core.DataCaptureContext.DeviceId` to get the unique identifier of the device.
+  * Added the ability to show content over the capture view. See :meth:`core.ui.DataCaptureView.ConnectToElement`.
+  * Added :type:`~barcode.tracking.ui.BarcodeTrackingAdvancedOverlay`.
+  * Added :meth:`core.Feedback.Emit`.
+  * Added :type:`parser.Parser`.
+  * Added MatrixScan Bubbles Sample.
+
+.. eager-ifconfig:: platform == 'xamarin.android'
+
+  * Added :enum:`scandit.datacapture.barcode.Symbology.IataTwoOfFive`
+  * Code 128 now always uses relaxed quiet zone rules. It is no longer necessary to use the relaxed quiet zone symbology extension.
+  * Introduced an experimental torch state (:enum:`core.TorchState.Auto`) that turns the torch on or off based on the current illumination.
+  * Added :type:`core.TorchListener` - a delegate to be invoked when :type:`core.TorchState` of a :type:`core.Camera` changes.
+  * When the shouldShowScanAreaGuides option is enabled :prop:`point of interest<core.ui.DataCaptureView.PointOfInterest>` is always drawn. When the radius for :type:`radius location selection<core.RadiusLocationSelection>` is set to 0 then a small circle is drawn.
+  * Added :prop:`core.DataCaptureContext.DeviceId` to get the unique identifier of the device.
+  * Added :type:`core.DataCaptureVersion`
+  * Added :type:`core.DataCaptureContextBuilder`
+  * Added :meth:`core.CameraSettings.GenericGetProperty`
+  * Added :meth:`core.CameraSettings.TryGetProperty`
+  * Added :meth:`barcode.BarcodeCaptureSettings.SetProperty`
+  * Added :meth:`barcode.BarcodeCaptureSettings.GenericGetProperty`
+  * Added :meth:`barcode.BarcodeCaptureSettings.TryGetProperty`
+  * Added :meth:`barcode.tracking.BarcodeTrackingSettings.SetProperty`
+  * Added :meth:`barcode.tracking.BarcodeTrackingSettings.GenericGetProperty`
+  * Added :meth:`barcode.tracking.BarcodeTrackingSettings.TryGetProperty`
+
+.. eager-ifconfig:: platform == 'xamarin.ios'
+
+  * Added :enum:`scandit.datacapture.barcode.Symbology.IataTwoOfFive`
+  * Code 128 now always uses relaxed quiet zone rules. It is no longer necessary to use the relaxed quiet zone symbology extension.
+  * Introduced an experimental torch state (:enum:`core.TorchState.Auto`) that turns the torch on or off based on the current illumination.
+  * Added :type:`core.TorchListener` - a delegate to be invoked when :type:`core.TorchState` of a :type:`core.Camera` changes.
+  * When the shouldShowScanAreaGuides option is enabled :prop:`point of interest<core.ui.DataCaptureView.PointOfInterest>` is always drawn. When the radius for :type:`radius location selection<core.RadiusLocationSelection>` is set to 0 then a small circle is drawn.
+  * Added :prop:`core.DataCaptureContext.DeviceId` to get the unique identifier of the device.
+  * Added :type:`core.DataCaptureVersion`
+  * Added :type:`core.DataCaptureContextBuilder`
+  * Added :meth:`core.CameraSettings.SetProperty`
+  * Added :meth:`core.CameraSettings.GetProperty`
+  * Added :meth:`core.CameraSettings.GenericGetProperty`
+  * Added :meth:`core.CameraSettings.TryGetProperty`
+  * Added :meth:`barcode.BarcodeCaptureSettings.SetProperty`
+  * Added :meth:`barcode.BarcodeCaptureSettings.GenericGetProperty`
+  * Added :meth:`barcode.BarcodeCaptureSettings.TryGetProperty`
+  * Added :meth:`barcode.tracking.BarcodeTrackingSettings.SetProperty`
+  * Added :meth:`barcode.tracking.BarcodeTrackingSettings.GenericGetProperty`
+  * Added :meth:`barcode.tracking.BarcodeTrackingSettings.TryGetProperty`
+  * Added :type:`barcode.tracking.ui.IBarcodeTrackingAdvancedOverlayListener`
+
+.. eager-ifconfig:: internal
+
+  Internal
+  ^^^^^^^^
+
+  .. eager-ifconfig:: platform == 'android'
+
+    * Added `Billing`: unless disabled in the license key, a billing ping is sent the first time a license key is used. After that a new billing request is sent every month and can (depends on the license) contain the number of barcode and text captured in that period. Currently `Billing` is only enabled for licenses that are allowed to transmit the number of captured barcodes and texts.
+    * Added deserialization for :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay`.
+    * Added hidden camera settings property `overwriteWithHighestResolution` to set the highest possible resolution.
+    * Added hidden camera settings property `shouldForceSmoothAutoFocus` to force smooth auto focus for all devices without exception.
+    * Added hidden property "xcoverInitialLensPosition". It can only be used with camera API 2 on the newest XCover Pro (2020). On other devices it will simply have no effect.
+    * Added hidden camera settings property `zoomAffectsMeteringArea`. This property is off by default and can be used to enable taking the current zoom factor into account when computing the metering areas for focus, exposure.
+    * Members related to FrameSource deserialization moved to com.scandit.datacapture.core.source.serialization package.
+    * Added hidden camera settings property `edgeEnhancementMode`. It can only be used with camera API 2.
+    * Added 'licenseKey' and 'licensee' hidden properties to :type:`text.TextCaptureSettings` and :type:`label.LabelCaptureSettings`.
+    * Added hidden camera settings property `minFrameRate` to limit the frame rate above certain level. 0 (default) = no limitation. It can only be used with camera API 2.
+    * Added hidden camera settings property `colorCorrection`. It can only be used with camera API 2.
+    * Added hidden camera settings property `toneMappingCurve` (JSON enum: `none`, `linear`, `gamma22`, `srgb`). It can only be used with camera API 2.
+    * 'text' and 'id' modules are now backed by a single combined BlinkInput+Id library. This library is named 'ScanditTextCaptureBase.aar' inside the archive (the same as BlinkInput previously).
+    * `optimizesRendering` is now on by default. UI redraws only happen when a visual element changes.
+    * Added hidden camera settings property `noiseReductionMode` (JSON enum: `off`, `fast`, `highQuality`). It can only be used with camera API 2.
+    * Added hidden camera settings property `macroAutofocusMode` (JSON enum: `off`, `macro`, `manualThenContinuous`). It can only be used with camera API 2.
+    * Added a `tap to focus hack <https://wiki.scandit.com/pages/viewpage.action?pageId=108265502>`_ with the hidden options `triggerAf` and `disableRetriggerAndContinuous`.
+
+  .. eager-ifconfig:: platform == 'ios'
+
+    * Added `Billing`: unless disabled in the license key, a billing ping is sent the first time a license key is used. After that a new billing request is sent every month and can (depends on the license) contain the number of barcode and text captured in that period. Currently `Billing` is only enabled for licenses that are allowed to transmit the number of captured barcodes and texts.
+    * Added deserialization for :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay`.
+    * Added private camera settings property 'SDCCameraSettings.overwriteWithHighestResolution'.
+    * Added 'licenseKey' and 'licensee' hidden properties to :type:`text.TextCaptureSettings`.
+    * Added 'licenseKey' and 'licensee' hidden properties to :type:`label.LabelCaptureSettings`.
+    * `optimizesRendering` is now on by default. UI redraws only happen when a visual element changes.
+    * ScanditIDC.framework and ScanditIDC.bundle have been deprecated and removed. Please use ScanditOCR.framework and ScanditOCR.bundle instead.
+    * Added a `tap to focus hack <https://wiki.scandit.com/pages/viewpage.action?pageId=108265502>`_ with the hidden options `triggerAf` and `disableRetriggerAndContinuous`.
+    * Added :type:`core.VolumeButtonObserver`.
+
+  .. eager-ifconfig:: platform == 'cordova'
+
+    * Added `Billing`: unless disabled in the license key, a billing ping is sent the first time a license key is used. After that a new billing request is sent every month and can (depends on the license) contain the number of barcode and text captured in that period. Currently `Billing` is only enabled for licenses that are allowed to transmit the number of captured barcodes and texts.
+    * Added hidden camera settings property `overwriteWithHighestResolution` to set the highest possible resolution.
+    * Added hidden camera settings property `shouldForceSmoothAutoFocus` to force smooth auto focus for all devices without exception.
+    * Added hidden camera settings property "xcoverInitialLensPosition". It can only be used with camera API 2 on the newest XCover Pro (2020). On other devices it will simply have no effect.
+    * Added hidden camera settings property `zoomAffectsMeteringArea`. This property is off by default and can be used to enable taking the current zoom factor into account when computing the metering areas for focus, exposure.
+    * Added a `tap to focus hack <https://wiki.scandit.com/pages/viewpage.action?pageId=108265502>`_ with the hidden options `triggerAf` and `disableRetriggerAndContinuous`
+
+  .. eager-ifconfig:: platform == 'xamarin.android'
+
+    * Added `Billing`: unless disabled in the license key, a billing ping is sent the first time a license key is used. After that a new billing request is sent every month and can (depends on the license) contain the number of barcode and text captured in that period. Currently `Billing` is only enabled for licenses that are allowed to transmit the number of captured barcodes and texts.
+    * Added hidden camera settings property `overwriteWithHighestResolution` to set the highest possible resolution.
+    * Added hidden camera settings property `shouldForceSmoothAutoFocus` to force smooth auto focus for all devices without exception.
+    * Added hidden camera settings property `xcoverInitialLensPosition`. It can only be used with camera API 2 on the newest XCover Pro (2020). On other devices it will simply have no effect.
+    * Added hidden camera settings property `zoomAffectsMeteringArea`. This property is off by default and can be used to enable taking the current zoom factor into account when computing the metering areas for focus, exposure.
+    * Made :type:`core.TimeInterval` only internally available, the public API now uses .NET's `System.TimeSpan<https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=netstandard-2.1>`_ type at
+      every place instead of the :type:`core.TimeInterval`.
+    * Added a `tap to focus hack <https://wiki.scandit.com/pages/viewpage.action?pageId=108265502>`_ with the hidden options `triggerAf` and `disableRetriggerAndContinuous`
+
+  .. eager-ifconfig:: platform == 'xamarin.ios'
+
+    * Added `Billing`: unless disabled in the license key, a billing ping is sent the first time a license key is used. After that a new billing request is sent every month and can (depends on the license) contain the number of barcode and text captured in that period. Currently `Billing` is only enabled for licenses that are allowed to transmit the number of captured barcodes and texts.
+    * Made :prop:`barcode.BarcodeCaptureSettings.CodeDuplicateFilter` a `System.TimeSpan<https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=netstandard-2.1>`_ type.
+    * Added a `tap to focus hack <https://wiki.scandit.com/pages/viewpage.action?pageId=108265502>`_ with the hidden options `triggerAf` and `disableRetriggerAndContinuous`
+
+Behavioral Changes
+------------------
+
+.. eager-ifconfig:: platform == 'android'
+
+  * `ScanditCaptureCore.aar` now depends on `com.squareup.okhttp3:okhttp:3.12.10`. If you are using Gradle or Maven no action is required. If you are directly adding the AAR files to your project, you need to also add this dependency.
+
+.. eager-ifconfig:: platform == 'xamarin.android'
+
+  * `Scandit.DataCapture.Core.nupkg` package now depends on `Square.OkHttp3 <https://www.nuget.org/packages/Square.OkHttp3/>`.
+
+.. eager-ifconfig:: platform == 'cordova'
+
+  * `scandit-cordova-datacapture-core` on Android now depends on `com.squareup.okhttp3:okhttp:3.12.10`.
+
+.. eager-ifconfig:: platform != 'android' and platform != 'xamarin.android' and platform != 'cordova'
+
+  No behavioral changes have been made.
+
+Performance Improvements
+------------------------
+
+.. eager-ifconfig:: platform == 'android' or platform == 'xamarin.android' or platform == 'cordova'
+
+* Improved recognition for 1d barcodes close to 1px per bar.
+* Performance Improvements on the Samsung XCover Pro.
+
+.. eager-ifconfig:: platform != 'android' and platform != 'xamarin.android' and platform != 'cordova'
+
+* Improved recognition for 1d barcodes close to 1px per bar.
+
+Bug Fixes
+---------
+
+.. eager-ifconfig:: platform == 'ios'
+
+  * Fixed a very rare infinite loop in the QR code reader.
+  * Fixed an unhandled intersection error in the Data Matrix Decoder.
+  * Fixed a bug causing the scan area to be miscalculated in certain scenarios.
+  * :meth:`barcode.tracking.BarcodeTrackingSettings.GetSymbologySettings` now returns a nonnull :type:`barcode.SymbologySettings` instance.
+  * SwissQr parser: fixed bug where additional, empty sections were treated as an error.
+
+.. eager-ifconfig:: platform == 'android'
+
+  * Fixed a very rare infinite loop in the QR code reader.
+  * Fixed an unhandled intersection error in the Data Matrix Decoder.
+  * Fixed a bug that prevented a :type:`core.ui.DataCaptureView` from being garbage collected.
+  * SwissQr parser: fixed bug where additional, empty sections were treated as an error.
+
+.. eager-ifconfig:: platform == 'cordova'
+
+  * Fixed a very rare infinite loop in the QR code reader.
+  * Fixed an unhandled intersection error in the Data Matrix Decoder.
+  * Fixed an issue that caused barcodes of certain symbologies to be returned as being of unknown symbology.
+  * Fixed an issue that caused recommended :type:`CameraSettings` to sometimes change between usages.
+
+.. eager-ifconfig:: platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  * Fixed a very rare infinite loop in the QR code reader.
+  * Fixed an unhandled intersection error in the Data Matrix Decoder.
+
+.. eager-ifconfig:: internal
+
+  Internal
+  ^^^^^^^^
+
+  * Fixed a crash when using :type:`core.ImageFrameSource` with :type:`text.TextCapture`.
+  * Fixed bug that :prop:`point of interest<core.ui.DataCaptureView.PointOfInterest>` was not drawn correctly when the shouldShowScanAreaGuides option is enabled and non-zero scan area margins were specified.
+
+Deprecations
+------------
+
+No deprecations have been made.
+
+.. eager-ifconfig:: internal
+
+  Internal
+  ^^^^^^^^
+
+  * `[DataCaptureViewDeserializer dataCaptureViewDeserializerWithDeserializerModes]` has been renamed to :meth:`DataCaptureViewDeserializer.DataCaptureViewDeserializer`
+
+Updates
+-------
+
+Changes in |sdk| 6.3.1 (May 22nd 2020)
+--------------------------------------
+
+.. eager-ifconfig:: platform == 'android' or platform == 'xamarin.android'
+
+  * Fixed potential memory leaks related to listeners.
+
+.. eager-ifconfig:: platform == 'cordova'
+
+  * Added the ability to manually size and position the :type:`core.ui.DataCaptureView` using :meth:`~core.ui.DataCaptureView.SetFrame`, :meth:`~core.ui.DataCaptureView.Show` and :meth:`~core.ui.DataCaptureView.Hide`.
+  * Fixed potential memory leaks related to listeners on Android.
+  * Added :type:`core.Rect` and constructors for :type:`core.Size` and :type:`core.Point`.
+
+.. eager-ifconfig:: platform != 'cordova' and platform != 'android' and platform != 'xamarin.android'
+
+  Contains no bug fixes for this platform.
+
+.. eager-ifconfig:: internal
+
+  Internal
+  ^^^^^^^^
+
+  * Now compiling with `-fstack-protector-strong`.
+
+Changes in |sdk| 6.3.2
+----------------------
+
+.. eager-ifconfig:: platform == 'cordova'
+
+  * Fixed an issue where scanning would stop working after disabling and reenabling the capture mode and similar scenarios.
+
+.. eager-ifconfig:: platform == 'android' or platform == 'ios'
+
+  * Improved the MRTD parser's false positive compensation algorithm.
+        
+.. eager-ifconfig:: platform != 'cordova' and platform != 'android' and platform != 'ios'
+
+  Contains no bug fixes for this platform.
+
+.. eager-ifconfig:: internal
+
+  Internal
+  ^^^^^^^^
+  
+  .. eager-ifconfig:: platform == 'android'
+
+    * The context, view and frame source deserializers now keep references to the deserializers they use also in java. Previously this could lead to those deserializers and their listeners being deallocated.

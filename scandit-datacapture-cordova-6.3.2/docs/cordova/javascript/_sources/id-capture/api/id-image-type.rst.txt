@@ -1,0 +1,20 @@
+Id Image Type
+======================
+
+.. module:: scandit.datacapture.id
+  :android-package: com.scandit.datacapture.id.data
+
+.. enum:: IdImageType
+  :available: android=6.2, ios=6.2
+
+  Possible image types that can be extracted from a recognized document.
+
+  .. value:: Face
+    :available: android=6.2, ios=6.2
+
+    Photo of the document's holder.
+
+  .. value:: Id
+    :available: android=6.2, ios=6.2
+
+    Image of a document.

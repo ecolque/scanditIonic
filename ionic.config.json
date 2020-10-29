@@ -1,5 +1,7 @@
 {
   "name": "helloscandit",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

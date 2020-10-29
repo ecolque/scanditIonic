@@ -1,0 +1,129 @@
+Barcode Tracking Advanced Overlay
+=================================
+
+.. module:: scandit.datacapture.barcode.tracking.ui
+  :android-package: com.scandit.datacapture.barcode.tracking.ui.overlay
+
+.. class:: BarcodeTrackingAdvancedOverlay : core.ui.IDataCaptureOverlay
+  @objc@ SDCBarcodeTrackingAdvancedOverlay : UIView <SDCDataCaptureOverlay>
+  @java@ BarcodeTrackingAdvancedOverlay : FrameLayout, core.ui.overlay.DataCaptureOverlay
+  @xamarin.android#csharp@ BarcodeTrackingAdvancedOverlay : FrameLayout, Core.Ui.IDataCaptureOverlay
+  @xamarin.ios#csharp@ BarcodeTrackingAdvancedOverlay : UIView, Core.Ui.IDataCaptureOverlay
+  :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    An overlay for :type:`core.ui.DataCaptureView` that allows anchoring a single user-provided View to each tracked barcode.
+
+    The provided view is visible on the top of the camera preview as long as its tracked barcode is and for all this time retains its relative position to it. This is useful when an additional information should be provided to tracked barcodes in real time. For instance, a user may overlay the price of an item or its expiry date for each corresponding barcode.
+
+    To display the views, this overlay must be attached to a :type:`core.ui.DataCaptureView`. This may be done either by creating it with :meth:`NewInstance` with a non-null view parameter or by passing this overlay to :meth:`core.ui.DataCaptureView.AddOverlay`.
+
+    A user of this class may configure what view is displayed for the given barcode and the relative position between the two by implementing :type:`IBarcodeTrackingAdvancedOverlayListener` or by calling :meth:`SetViewForTrackedBarcode`, :meth:`SetAnchorForTrackedBarcode` or :meth:`SetOffsetForTrackedBarcode`.
+
+    For additional information about using this overlay, refer to :doc:`/get-started-matrixscan` and :doc:`/add-augmented-reality-overlay`.
+
+  .. method:: static BarcodeTrackingAdvancedOverlay NewInstance(BarcodeTracking barcodeTracking, core.ui.DataCaptureView? view)
+    @objc@ + (instancetype)overlayWithBarcodeTracking:(nonnull SDCBarcodeTracking *)barcodeTracking forDataCaptureView:(nullable SDCDataCaptureView *)view
+    @javascript@ static withBarcodeTrackingForView(barcodeTracking: BarcodeTracking, view: core.ui.DataCaptureView?): BarcodeTrackingAdvancedOverlay
+    @csharp@ static BarcodeTrackingAdvancedOverlay Create(BarcodeTracking barcodeTracking, core.ui.DataCaptureView? view)
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    Constructs a new barcode tracking advanced overlay for the barcode tracking instance. The overlay is automatically added to the view.
+
+  .. method:: static BarcodeTrackingAdvancedOverlay FromJson(BarcodeTracking mode, String jsonData)
+    @objc@ + (nullable instancetype)barcodeTrackingAdvancedOverlayFromJSONString:(nonnull NSString *)JSONString mode:(nonnull SDCBarcodeTracking *)mode error:(NSError **)error
+    :available: android=6.3, ios=6.3, xamarin=6.3
+
+    Constructs a new barcode tracking advanced overlay with the provided JSON serialization. See :doc:`/core/serialization` for details.
+
+    For the overlay to be displayed on screen, it must be added to a :type:`core.ui.DataCaptureView`.
+
+  .. property:: IBarcodeTrackingAdvancedOverlayListener? Listener { get; set; }
+    @objc@ @property (nonatomic, nullable, weak) id<SDCBarcodeTrackingAdvancedOverlayDelegate> delegate
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+  .. method:: void SetViewForTrackedBarcode(TrackedBarcode trackedBarcode, View? view)
+    @objc@ - (void)setView:(nullable UIView *)view forTrackedBarcode:(nonnull SDCTrackedBarcode *)trackedBarcode
+    @javascript@ setViewForTrackedBarcode(view: Promise<TrackedBarcodeView?>, trackedBarcode: TrackedBarcode): Promise<void>
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    The method can be called to change the view drawn for the given tracked barcode. Setting the view to |null| will unset the view from the tracked barcode and will effectively remove it from the overlay.
+    This method is thread-safe, it can be called from any thread.
+    The view set via this method will take precedence over the one set via :meth:`IBarcodeTrackingAdvancedOverlayListener.ViewForTrackedBarcode`: in case a view is set before :meth:`IBarcodeTrackingAdvancedOverlayListener.ViewForTrackedBarcode` got called, no call to :meth:`IBarcodeTrackingAdvancedOverlayListener.ViewForTrackedBarcode` will happen.
+
+  .. method:: void SetAnchorForTrackedBarcode(TrackedBarcode trackedBarcode, core.Anchor anchor)
+    @objc@ - (void)setAnchor:(SDCAnchor)anchor forTrackedBarcode:(nonnull SDCTrackedBarcode *)trackedBarcode
+    @javascript@ setAnchorForTrackedBarcode(anchor: core.Anchor, trackedBarcode: TrackedBarcode): Promise<void>
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    The method can be called to change the anchor point for the view associated with the given tracked barcode. This method is thread-safe, it can be called from any thread.
+    The anchor set via this method will take precedence over the one set via :meth:`IBarcodeTrackingAdvancedOverlayListener.AnchorForTrackedBarcode`: in case a view is set before :meth:`IBarcodeTrackingAdvancedOverlayListener.AnchorForTrackedBarcode` got called, no call to :meth:`IBarcodeTrackingAdvancedOverlayListener.AnchorForTrackedBarcode` will happen.
+
+  .. method:: void SetOffsetForTrackedBarcode(TrackedBarcode trackedBarcode, core.PointWithUnit offset)
+    @objc@ - (void)setOffset:(SDCPointWithUnit)offset forTrackedBarcode:(nonnull SDCTrackedBarcode *)trackedBarcode
+    @javascript@ setOffsetForTrackedBarcode(offset: core.PointWithUnit, trackedBarcode: TrackedBarcode): Promise<void>
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    The method can be called to change the offset for the view associated with the given tracked barcode. This method is thread-safe, it can be called from any thread.
+    The offset set via this method will take precedence over the one set via :meth:`IBarcodeTrackingAdvancedOverlayListener.OffsetForTrackedBarcode`: in case a view is set before :meth:`IBarcodeTrackingAdvancedOverlayListener.OffsetForTrackedBarcode` got called, no call to :meth:`IBarcodeTrackingAdvancedOverlayListener.OffsetForTrackedBarcode` will happen.
+    If the :type:`core.MeasureUnit` of the offset is :enum:`core.MeasureUnit.Fraction`, the offset is calculated relative to view's dimensions.
+
+  .. method:: void ClearTrackedBarcodeViews()
+    @javascript@ clearTrackedBarcodeViews(): Promise<void>
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    Clears all the views for the currently tracked barcodes from this overlay.
+    This method is thread-safe, it can be called from any thread.
+
+  .. property:: bool ShouldRotate { get; set; }
+    :available: none
+
+    |True| if the views (that belong to the overlay and are managed by it) should be rotated by the same angle as their corresponding :type:`TrackedBarcodes <barcode.tracking.TrackedBarcode>`. Otherwise, the views will be aligned relative to the device's screen.
+    Default is |false|.
+
+  .. method:: void UpdateFromJson(String jsonData)
+    @objc@ - (BOOL)updateFromJSONString:(nonnull NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3, xamarin=6.3
+
+    Updates the overlay according to a JSON serialization. See :doc:`/core/serialization` for details.
+
+.. todo:: TBD when scaling is needed
+.. interface:: AdvancedOverlayScalingStrategy
+  :available: none
+
+  |Interface| for defining how views managed by a :type:`BarcodeTrackingAdvancedOverlay` instance should be scaled relative to the view and/or tracked barcode size.
+
+  A couple of standard scaling strategies are provided out of the box:
+  * :type:`NoScaling` is a no-op scaling strategy that leaves the view as is,
+  * :type:`WidthScaling` is a scaling strategy directly proportional to tracked barcode's width,
+  * :type:`HeightScaling` is a scaling strategy directly proportional to tracked barcode's height.
+
+  .. method:: SizeWithUnit getSize(SizeWithUnit trackedBarcodeSize, SizeWithUnit viewSize)
+    :available: none
+
+    Scaling method. Every class implementing the :type:`AdvancedOverlayScalingStrategy` has to provide a strategy to calculate the scaled size for a view.
+
+
+.. class:: NoScaling : AdvancedOverlayScalingStrategy
+  :available: none
+
+  No scaling is applied.
+
+.. class:: WidthScaling : AdvancedOverlayScalingStrategy
+  :available: none
+
+  Scaling directly proportional to tracked barcode's width is applied.
+
+  .. property:: float Factor { get; set; }
+    :available: none
+
+    Scaling factor.
+
+.. class:: HeightScaling : AdvancedOverlayScalingStrategy
+  :available: none
+
+  Scaling directly proportional to tracked barcode's height is applied.
+
+  .. property:: float Factor { get; set; }
+    :available: none
+
+    Scaling factor.

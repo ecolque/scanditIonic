@@ -1,0 +1,18 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+ScanditIdCapture
+==================
+
+.. module:: scandit.datacapture.id
+  :hidden:
+
+*ScanditIdCapture* is a module designed to read and parse different types of documents.
+
+.. toctree::
+  :hidden:
+  :glob:
+
+  API<api>
+  Parsed Document Fields<id-or-driver-license>

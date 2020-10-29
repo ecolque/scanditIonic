@@ -1,0 +1,135 @@
+ScanditBarcodeCapture API
+=========================
+
+.. module:: scandit.datacapture.barcode
+  :hidden:
+
+.. eager-ifconfig:: platform != "cordova"
+
+  .. toctree::
+    :hidden:
+    :glob:
+
+    api/barcode-capture-deserializer-listener.rst
+    api/barcode-capture-deserializer.rst
+    api/barcode-capture-feedback.rst
+    api/barcode-capture-listener.rst
+    api/barcode-capture-session.rst
+    api/barcode-capture-settings.rst
+    api/barcode-capture.rst
+    api/barcode-tracking-deserializer-listener.rst
+    api/barcode-tracking-deserializer.rst
+    api/barcode-tracking-listener.rst
+    api/barcode-tracking-session.rst
+    api/barcode-tracking-settings.rst
+    api/barcode-tracking.rst
+    api/barcode.rst
+    api/checksum.rst
+    api/composite-flag.rst
+    api/localized-only-barcode.rst
+    api/symbology-description.rst
+    api/symbology-settings.rst
+    api/symbology.rst
+    api/tracked-barcode.rst
+    api/ui/barcode-capture-overlay.rst
+    api/ui/barcode-tracking-advanced-overlay-listener.rst
+    api/ui/barcode-tracking-advanced-overlay.rst
+    api/ui/barcode-tracking-basic-overlay-listener.rst
+    api/ui/barcode-tracking-basic-overlay.rst
+
+.. eager-ifconfig:: platform == "cordova"
+
+  .. toctree::
+    :hidden:
+
+    api/barcode-capture-feedback.rst
+    api/barcode-capture-listener.rst
+    api/barcode-capture-session.rst
+    api/barcode-capture-settings.rst
+    api/barcode-capture.rst
+    api/barcode-tracking-listener.rst
+    api/barcode-tracking-session.rst
+    api/barcode-tracking-settings.rst
+    api/barcode-tracking.rst
+    api/barcode.rst
+    api/checksum.rst
+    api/composite-flag.rst
+    api/localized-only-barcode.rst
+    api/symbology-description.rst
+    api/symbology-settings.rst
+    api/symbology.rst
+    api/tracked-barcode.rst
+    api/ui/barcode-capture-overlay.rst
+    api/ui/barcode-tracking-advanced-overlay-listener.rst
+    api/ui/barcode-tracking-advanced-overlay.rst
+    api/ui/barcode-tracking-basic-overlay-listener.rst
+    api/ui/barcode-tracking-basic-overlay.rst
+    api/ui/tracked-barcode-view.rst
+
+
+Traditional Barcode Scanning
+----------------------------
+
+.. hlist::
+
+  * :type:`BarcodeCapture`
+  * :type:`BarcodeCaptureSession`
+  * :type:`IBarcodeCaptureListener`
+  * :type:`BarcodeCaptureSettings`
+  * :type:`ui.BarcodeCaptureOverlay`
+  * :type:`BarcodeCaptureFeedback`
+  * :type:`Barcode`
+  * :type:`Checksum`
+  * :type:`CompositeFlag`
+  * :type:`Symbology`
+  * :type:`SymbologySettings`
+
+.. module:: scandit.datacapture.barcode.tracking
+  :hidden:
+
+MatrixScan (Barcode Tracking)
+-----------------------------
+
+.. eager-ifconfig:: platform == "cordova"
+
+  .. hlist::
+
+    * :type:`BarcodeTracking`
+    * :type:`IBarcodeTrackingListener`
+    * :type:`ui.BarcodeTrackingBasicOverlay`
+
+.. eager-ifconfig:: platform != "cordova"
+
+  .. hlist::
+
+    * :type:`BarcodeTracking`
+    * :type:`BarcodeTrackingSession`
+    * :type:`BarcodeTrackingSettings`
+    * :type:`IBarcodeTrackingListener`
+    * :type:`TrackedBarcode`
+    * :type:`ui.BarcodeTrackingBasicOverlay`
+    * :type:`ui.IBarcodeTrackingBasicOverlayListener`
+    * :type:`ui.BarcodeTrackingAdvancedOverlay`
+    * :type:`ui.IBarcodeTrackingAdvancedOverlayListener`
+
+Deserialization
+---------------
+
+.. eager-ifconfig:: platform == "cordova"
+
+  The deserialization API is not available for Cordova.
+
+.. eager-ifconfig:: platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  The deserialization API is not available for Xamarin.
+
+.. eager-ifconfig:: platform == "android" or platform == "ios"
+
+  .. warning::
+
+    The deserialization API is not yet stable and will still change over the coming releases.
+
+  .. hlist::
+
+    * :type:`BarcodeCaptureDeserializer`
+    * :type:`BarcodeTrackingDeserializer`

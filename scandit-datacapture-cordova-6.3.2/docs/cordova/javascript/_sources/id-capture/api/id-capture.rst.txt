@@ -1,0 +1,41 @@
+Id Capture
+==================
+
+.. module:: scandit.datacapture.id
+  :android-package: com.scandit.datacapture.id.capture
+
+.. class:: IdCapture : core.IDataCaptureMode
+  :available: android=6.2, ios=6.2
+
+  .. method:: static IdCapture ForDataCaptureContext(core.DataCaptureContext? dataCaptureContext, IdCaptureSettings settings)
+    @objc@ + (instancetype)idCaptureWithContext:(nullable SDCDataCaptureContext *)context settings:(nonnull SDCIdCaptureSettings *)settings    
+    :available: android=6.2, ios=6.2
+
+    Constructs a new :type:`IdCapture` with the provided settings. When dataCaptureContext is not |null|, the mode is automatically added to it.
+
+  .. property:: bool IsEnabled { get; set; }
+    :available: android=6.2, ios=6.2
+
+    Implemented from :type:`core.IDataCaptureMode`. See :prop:`core.IDataCaptureMode.IsEnabled`.
+
+  .. method:: void AddListener(IIdCaptureListener listener)
+    :available: android=6.2, ios=6.2
+
+    Adds the listener to this id capture instance.
+
+  .. method:: void RemoveListener(IIdCaptureListener listener)
+    :available: android=6.2, ios=6.2
+
+    Removes listener from this id capture instance.
+
+  .. property:: core.DataCaptureContext? Context { get; }
+    @java@ core.DataCaptureContext? DataCaptureContext { get; }
+    :available: android=6.2, ios=6.2
+
+    Implemented from :type:`core.IDataCaptureMode`. See :prop:`core.IDataCaptureMode.Context`.
+
+  .. method:: static core.CameraSettings CreateRecommendedCameraSettings()
+    @objc@ @property (class, nonatomic, readonly, nonnull) SDCCameraSettings *recommendedCameraSettings
+    :available: android=6.2, ios=6.2
+
+    Creates the recommended camera settings to use with this mode.

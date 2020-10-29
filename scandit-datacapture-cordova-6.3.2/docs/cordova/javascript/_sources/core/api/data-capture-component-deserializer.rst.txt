@@ -1,0 +1,17 @@
+Data Capture Component Deserializer
+===================================
+
+.. module:: scandit.datacapture.core
+  :android-package: com.scandit.datacapture.core.component.serialization
+
+.. warning::
+
+  The deserialization API is not yet stable and will still change over the coming releases.
+
+.. interface:: IDataCaptureComponentDeserializer
+  @objc@ SDCDataCaptureComponentDeserializer <NSObject>
+  :available: android=6.3, ios=6.3
+
+  An interface for all data capture component deserializers.
+
+  **Related topics**: :doc:`/core/serialization`.

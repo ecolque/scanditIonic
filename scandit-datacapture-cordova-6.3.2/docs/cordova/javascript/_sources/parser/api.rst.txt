@@ -1,0 +1,48 @@
+.. eager-ifconfig:: platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+ScanditParser API
+=================
+
+.. module:: scandit.datacapture.parser
+  :hidden:
+
+.. eager-ifconfig:: platform == 'ios' or platform == 'android' or platform == 'cordova'
+
+  ..  toctree::
+    :hidden:
+    :glob:
+
+    api/*
+
+
+  .. hlist::
+
+    * :type:`Parser`
+    * :type:`ParsedData`
+    * :type:`ParsedField`
+    * :type:`ParserDataFormat`
+
+
+Deserialization
+---------------
+
+.. eager-ifconfig:: platform == "cordova"
+
+  The deserialization API is not available for Cordova.
+
+.. eager-ifconfig:: platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  The deserialization API is not available for Xamarin.
+
+.. eager-ifconfig:: platform == "android"
+
+  .. warning::
+
+    The deserialization API is not yet stable and will still change over the coming releases.
+
+  .. hlist::
+
+    * :type:`ParserDeserializer`
+    

@@ -1,0 +1,37 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+Label Capture Settings
+======================
+
+.. module:: scandit.datacapture.label
+  :android-package: com.scandit.datacapture.label.capture
+
+.. class:: LabelCaptureSettings
+  @objc@ SDCLabelCaptureSettings : NSObject <NSCopying>
+  :available: ios=6.0, android=6.0
+
+  .. method:: static LabelCaptureSettings LoadFromString(Data data)
+    @objc@ +(nullable instancetype)settingsFromString:(nonnull NSString*)string error:(NSError **)error
+    :available: ios=6.0
+
+    Loads the settings from a label blueprint, provided to you by Scandit.
+    
+  .. method:: static LabelCaptureSettings LoadFromString(String string)
+    @objc@ +(nullable instancetype)settingsFromString:(nonnull NSString *)string error:(NSError **)error
+    :available: ios=6.0, android=6.0
+
+    Load the settings from the string representation (JSON) of a label blueprint, provided to you by Scandit.
+
+  .. method:: void SetProperty(string name, object value)
+    @objc@ - (void)setValue:(nullable id)value forProperty:(nonnull NSString *)property
+    :available: android=6.3, ios=6.3
+
+    Sets a property to the provided value. Use this method to set properties that are not yet part of a stable API. Properties set through this method may change in a future release.
+
+  .. method:: object GetProperty(string name)
+    @objc@ - (nullable id)valueForProperty:(nonnull NSString *)property
+    :available: android=6.3, ios=6.3
+
+    Retrieves the value of a previously set property. In case the property does not exist, |null| is returned. Use this method to get properties that are not yet part of a stable API. These properties may change in a future release.

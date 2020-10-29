@@ -1,0 +1,48 @@
+Barcode Tracking Advanced Overlay |Delegate|
+============================================
+
+.. module:: scandit.datacapture.barcode.tracking.ui
+  :android-package: com.scandit.datacapture.barcode.tracking.ui.overlay
+
+.. interface:: IBarcodeTrackingAdvancedOverlayListener
+  @objc@ SDCBarcodeTrackingAdvancedOverlayDelegate <NSObject>
+  :available: android=6.0, ios=6.0, cordova=6.3, xamarin.android=6.2, xamarin.ios=6.3
+
+  .. method:: View? ViewForTrackedBarcode(BarcodeTrackingAdvancedOverlay overlay, TrackedBarcode trackedBarcode)
+    @objc@ - (nullable UIView *)barcodeTrackingAdvancedOverlay:(nonnull SDCBarcodeTrackingAdvancedOverlay *)overlay viewForTrackedBarcode:(nonnull SDCTrackedBarcode *)trackedBarcode
+    @javascript@ viewForTrackedBarcode?(overlay: BarcodeTrackingAdvancedOverlay, trackedBarcode: TrackedBarcode): Promise<TrackedBarcodeView?>
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    View to be drawn corresponding to the given :type:`TrackedBarcode`.
+    This method will be called before :meth:`IBarcodeTrackingAdvancedOverlayListener.AnchorForTrackedBarcode` and :meth:`IBarcodeTrackingAdvancedOverlayListener.OffsetForTrackedBarcode`.
+    Called from the main thread.
+    Beware that this view can be overridden with :meth:`BarcodeTrackingAdvancedOverlay.SetViewForTrackedBarcode` method.
+    This method will only be called for new tracked barcodes that do not have a view yet, e.g. a view set by a call to :meth:`BarcodeTrackingAdvancedOverlay.SetViewForTrackedBarcode`.
+
+  .. method:: core.Anchor AnchorForTrackedBarcode(BarcodeTrackingAdvancedOverlay overlay, TrackedBarcode trackedBarcode)
+    @objc@ - (SDCAnchor)barcodeTrackingAdvancedOverlay:(nonnull SDCBarcodeTrackingAdvancedOverlay *)overlay anchorForTrackedBarcode:(nonnull SDCTrackedBarcode *)trackedBarcode
+    @javascript@ anchorForTrackedBarcode?(overlay: BarcodeTrackingAdvancedOverlay, trackedBarcode: TrackedBarcode): core.Anchor
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    Anchor point that should be used for the view corresponding to the given :type:`TrackedBarcode`.
+    This method will be called after :meth:`IBarcodeTrackingAdvancedOverlayListener.ViewForTrackedBarcode` and before :meth:`IBarcodeTrackingAdvancedOverlayListener.OffsetForTrackedBarcode`.
+    Called from the main thread.
+    Beware that this anchor can be overridden with :meth:`BarcodeTrackingAdvancedOverlay.SetAnchorForTrackedBarcode` method.
+    This method will only be called for new tracked barcodes that do not have an anchor yet, e.g. an anchor set by a call to :meth:`BarcodeTrackingAdvancedOverlay.SetAnchorForTrackedBarcode`.
+
+  .. method:: core.PointWithUnit OffsetForTrackedBarcode(BarcodeTrackingAdvancedOverlay overlay, TrackedBarcode trackedBarcode, View view)
+    @objc@ - (SDCPointWithUnit)barcodeTrackingAdvancedOverlay:(nonnull SDCBarcodeTrackingAdvancedOverlay *)overlay offsetForTrackedBarcode:(nonnull SDCTrackedBarcode *)trackedBarcode
+    @javascript@ offsetForTrackedBarcode?(overlay: BarcodeTrackingAdvancedOverlay, trackedBarcode: TrackedBarcode): core.PointWithUnit
+    :available: android=6.0, ios=6.0, cordova=6.3, xamarin=6.2
+
+    Offset to be set to the view corresponding to the given :type:`TrackedBarcode`. The offset is relative to the anchor point of the tracked barcode.
+    This method will be called after :meth:`IBarcodeTrackingAdvancedOverlayListener.ViewForTrackedBarcode` and :meth:`IBarcodeTrackingAdvancedOverlayListener.AnchorForTrackedBarcode`.
+    Called from the main thread.
+    Beware that this offset can be overridden with :meth:`BarcodeTrackingAdvancedOverlay.SetOffsetForTrackedBarcode` method.
+    This method will only be called for new tracked barcodes that do not have an offset yet, e.g. an offset set by a call to :meth:`BarcodeTrackingAdvancedOverlay.SetOffsetForTrackedBarcode`.
+
+  .. method:: void OnViewForTrackedBarcodeTapped(BarcodeTrackingAdvancedOverlay overlay, TrackedBarcode trackedBarcode)
+    @javascript@ didTapViewForTrackedBarcode?(overlay: BarcodeTrackingAdvancedOverlay, trackedBarcode: TrackedBarcode): void
+    :available: cordova=6.3
+
+    Callback method that can be used to define an action that should be performed when a view for a tracked barcode is tapped.

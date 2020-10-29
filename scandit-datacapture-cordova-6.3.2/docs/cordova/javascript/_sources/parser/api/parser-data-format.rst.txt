@@ -1,0 +1,50 @@
+.. eager-ifconfig:: platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+Parser Data Format
+=========================
+
+.. module:: scandit.datacapture.parser
+
+
+.. enum:: ParserDataFormat
+  :available: ios=6.1, android=6.1, cordova=6.3
+
+  Data formats supported by the :type:`Parser`.
+
+  .. value:: Gs1Ai
+    @objc@ SDCParserDataFormatGS1AI
+    @javascript@ GS1AI
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+  .. value:: Hibc
+    @objc@ SDCParserDataFormatHIBC
+    @javascript@ HIBC
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+  .. value:: Dlid
+    @objc@ SDCParserDataFormatDLID
+    @javascript@ DLID
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+  .. value:: Mrtd
+    @objc@ SDCParserDataFormatMRTD
+    @javascript@ MRTD
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+  .. value:: SwissQr
+    @objc@ SDCParserDataFormatSwissQR
+    @javascript@ SwissQR
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+  .. value:: Vin
+    @objc@ SDCParserDataFormatVIN
+    @javascript@ VIN
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+  .. value:: UsUsid
+    @objc@ SDCParserDataFormatUsUsid
+    @javascript@ UsUsid
+    :available: ios=6.3, android=6.3, cordova=6.3
+

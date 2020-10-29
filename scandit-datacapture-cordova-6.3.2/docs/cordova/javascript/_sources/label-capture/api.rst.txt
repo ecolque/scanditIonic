@@ -1,0 +1,32 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+ScanditLabelCapture API
+=======================
+
+.. module:: scandit.datacapture.label
+  :hidden:
+
+.. eager-ifconfig:: platform == 'ios' or platform == 'android'
+
+  .. toctree::
+    :hidden:
+    :glob:
+
+    api/*
+    api/ui/*
+
+  .. hlist::
+
+    * :type:`LabelCapture`
+    * :type:`LabelCaptureSettings`
+    * :type:`LabelCaptureSession`
+    * :type:`ILabelCaptureListener`
+    * :type:`LabelField`
+    * :type:`CapturedLabel`
+    * :type:`ui.LabelCaptureBasicOverlay`
+    * :type:`ui.ILabelCaptureBasicOverlayListener`
+    * :type:`LabelFieldState`
+    * :type:`LabelFieldType`
+ 

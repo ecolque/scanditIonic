@@ -1,0 +1,60 @@
+Captured Id
+==============
+
+.. module:: scandit.datacapture.id
+  :android-package: com.scandit.datacapture.id.data
+
+.. class:: CapturedId
+  @objc@ SDCCapturedId : NSObject
+  :available: android=6.2, ios=6.2
+
+  Holds the result of a successfully scanned and parsed data from the document.
+
+  The data contained in this session object can be accessed in one of the following ways:
+
+  * Through an array of id capture session fields (see :prop:`Fields`).
+
+  .. eager-ifconfig:: platform == 'ios'
+
+    * Through an array of id capture session fields (see :prop:`Fields`).
+
+  * Directly as a JSON string (see :prop:`JsonString`).
+
+  .. property:: int FieldsCount { get; }
+    :available: android=6.2
+
+    Return number of contained fields.
+
+  .. property:: string JsonString { get; }
+    :available: android=6.2, ios=6.2
+
+    The captured id object as a serialized JSON string.
+
+  .. method:: CapturedIdField GetFieldByName(string name)
+    @objc@ - (nullable SDCCapturedIdField *)fieldWithName:(NSString *)name
+    :available: android=6.2, ios=6.2
+
+     Get a field by its name.
+
+  .. property:: IList<CapturedIdField> Fields { get; }
+    :available: android=6.2, ios=6.2
+
+    The order of the fields matches the order in the original data string. The fields are data
+    format specific. Consult the data format documentation for information on available fields
+    :doc:`../id-or-driver-license`.
+
+  .. method:: android.graphics.Bitmap? GetImageBitmapForType(IdImageType type)
+    @objc@ - (nullable UIImage *)idImageOfType:(SDCIdImageType)idImageType
+    :available: android=6.2, ios=6.2
+
+    Gets a bitmap for image type.
+
+  .. method:: bool Equals(Object? obj)
+    :available: android=6.2
+
+    Indicates whether some other object is equal to this one.
+
+  .. method:: int HashCode()
+    :available: android=6.2
+
+    Returns a hash code value for the object.

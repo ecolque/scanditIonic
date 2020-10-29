@@ -1,0 +1,471 @@
+*********************
+US Uniformed Services
+*********************
+
+Overview
+========
+
+The parser supports parsing Uniformed Services Identification Cards that are encoded in PDF417 barcodes. Both Sponsor and Dependant documents are supported (versions 1, 2 and 3).
+For the complete documentation of the standard please refer to `US Uniformed Services ID <https://web.archive.org/web/20160222013345/http://www.cac.mil/docs/DoD-ID-Bar-Code_SDK-Formats_v7-5-0_Sep2012.pdf>`_.
+
+Below you will find the fields description for both sponsor and dependent format.
+
+Fields description
+==================
+
+An example of a sponsor format, version 3
+-----------------------------------------
+
+Parsing the following code (without quotes):
+
+::
+
+    "IDUS3&%^H1BESSELL, SOFIA             9759934671         0060150RDBR1982FEB21NNYYUNONE     NONE     2RRT  2011NOV042052OCT308   5RESRETUSAF AMN   E1  I  UNK[binary JPEG data...]"
+
+will result in the following JSON output:
+
+.. code-block:: javascript
+
+	[
+        {
+            "name" : "header",
+            "parsed" : {
+                "identificationCode": "IDUS",
+                "version": 3
+            },
+            "rawString": ""
+        },
+        {
+            "name" : "sponsorFlag",
+            "parsed" : "sponsor",
+            "rawString": "1"
+        },
+        {
+            "name" : "name",
+            "parsed" : ["BESSELL", "SOFIA"],
+            "rawString": "BESSELL, SOFIA             "
+        },
+        {
+            "name" : "personDesignatorIdentifier",
+            "parsed" : 975993467,
+            "rawString": "975993467"
+        },
+        {
+            "name" : "familySequenceNumber",
+            "parsed" : 1,
+            "rawString": "1"
+        },
+        {
+            "name" : "deersDependentSuffix",
+            "parsed" : {
+              "code": 0,
+              "description": "sponsor"
+            },
+            "rawString": "00"
+        },
+        {
+            "name" : "height",
+            "parsed" : 60,
+            "rawString": "60"
+        },
+        {
+            "name" : "weight",
+            "parsed" : 150,
+            "rawString": "150"
+        },
+        {
+            "name" : "hairColor",
+            "parsed" : "red",
+            "rawString": "RD"
+        },
+        {
+            "name" : "eyeColor",
+            "parsed" : "brown",
+            "rawString": "BR"
+        },
+        {
+            "name" : "birthDate",
+            "parsed" : {
+                "year": 1982,
+                "month": 2,
+                "day": 21
+            },
+            "rawString": "1992FEB21"
+        },
+        {
+            "name" : "directCareFlag",
+            "parsed" : {
+                "code": "N",
+                "description": "not eligible"
+            },
+            "rawString": "N"
+        },
+        {
+            "name" : "civilianHealthCare",
+            "parsed" : {
+                "code": "N",
+                "description": "not eligible"
+            },
+            "rawString": "N"
+        },
+        {
+            "name" : "commissary",
+            "parsed" : {
+                "code": "Y",
+                "description": "eligible and active"
+            },
+            "rawString": "Y"
+        },
+        {
+            "name" : "mwr",
+            "parsed" : {
+                "code": "Y",
+                "description": "eligible and active"
+            },
+            "rawString": "Y"
+        },
+        {
+            "name" : "exchange",
+            "parsed" : {
+                "code": "U",
+                "description": "unlimited"
+            },
+            "rawString": "U"
+        },
+        {
+            "name" : "champusEffectiveDate",
+            "parsed" : null,
+            "rawString": "NONE     "
+        },
+        {
+            "name" : "champusExpirationDate",
+            "parsed" : null,
+            "rawString": "NONE     "
+        },
+        {
+            "name" : "formNumber",
+            "parsed" : "2RRT",
+            "rawString": "2RRT  "
+        },
+        {
+            "name" : "cardIssueDate",
+            "parsed" : {
+                "year": 2011,
+                "month": 11,
+                "day": 4
+            },
+            "rawString": "2011NOV04"
+        },
+        {
+            "name" : "cardExpirationDate",
+            "parsed" : {
+                "year": 2052,
+                "month": 10,
+                "day": 30
+            },
+            "rawString": "2052OCT30"
+        },
+        {
+            "name" : "securityCode",
+            "parsed" : "8   ",
+            "rawString": "8   "
+        },
+        {
+            "name" : "serviceCode",
+            "parsed" : "5",
+            "rawString": "5"
+        },
+        {
+            "name" : "status",
+            "parsed" : {
+                "code": "RESRET",
+                "description": "National Guard and Reserve members who retire, but are not entitled to retired pay until age 60"
+            },
+            "rawString": "RESRET"
+        },
+        {
+            "name" : "branchOfService",
+            "parsed" : "USAF",
+            "rawString": "USAF "
+        },
+        {
+            "name" : "rank",
+            "parsed" : "AMN",
+            "rawString": "AMN   "
+        },
+        {
+            "name" : "payGrade",
+            "parsed" : "E1",
+            "rawString": "E1  "
+        },
+        {
+            "name" : "genevaConventionCategory",
+            "parsed" : "I",
+            "rawString": "I  "
+        },
+        {
+            "name" : "bloodType",
+            "parsed" : "unknown",
+            "rawString": "UNK"
+        },
+        {
+            "name" : "jpegData",
+            "parsed" : null,
+            "rawString": "jpeg data encoded in base64 format"
+        }
+	]
+
+An example of a dependent format, version 3
+-------------------------------------------
+
+Parsing the following code (without quotes):
+
+::
+
+    "IDUS3&*G$0MUSLIN, WOMAN              81276439019998899980155100GYGY1991MAY13SMYYU2010NOV172013NOV151173  2010NOV172013NOV15S   BAD    USN  NON-POE2         TESLIN, TESLIN      999999999SP    [binary JPEG data...]"
+
+will result in the following JSON output:
+
+.. code-block:: javascript
+
+	[
+        {
+            "name" : "Header",
+            "parsed" : {
+                "identificationCode": "IDUS",
+                "version": 3
+            },
+            "rawString": ""
+        },
+        {
+            "name" : "sponsorFlag",
+            "parsed" : "dependent",
+            "rawString": "0"
+        },
+        {
+            "name" : "name",
+            "parsed" : ["MUSLIN", "WOMAN"],
+            "rawString": "MUSLIN, WOMAN              "
+        },
+        {
+            "name" : "personDesignatorIdentifier",
+            "parsed" : 812764390,
+            "rawString": "812764390"
+        },
+        {
+            "name" : "familySequenceNumber",
+            "parsed" : 1,
+            "rawString": "1"
+        },
+        {
+            "name" : "deersDependentSuffix",
+            "parsed" : {
+              "code": 1,
+              "description": "dependent child"
+            },
+            "rawString": "01"
+        },
+        {
+            "name" : "height",
+            "parsed" : 55,
+            "rawString": "55"
+        },
+        {
+            "name" : "weight",
+            "parsed" : 100,
+            "rawString": "100"
+        },
+        {
+            "name" : "hairColor",
+            "parsed" : "gray",
+            "rawString": "GY"
+        },
+        {
+            "name" : "eyeColor",
+            "parsed" : "gray",
+            "rawString": "GY"
+        },
+        {
+            "name" : "birthDate",
+            "parsed" : {
+                "year": 1991,
+                "month": 5,
+                "day": 13
+            },
+            "rawString": "1991MAY13"
+        },
+        {
+            "name" : "directCareFlag",
+            "parsed" : {
+                "code": "S",
+                "description": "unlimited"
+            },
+            "rawString": "S"
+        },
+        {
+            "name" : "civilianHealthCare",
+            "parsed" : {
+                "code": "M",
+                "description": "CHAMPUS"
+            },
+            "rawString": "M"
+        },
+        {
+            "name" : "commissary",
+            "parsed" : {
+                "code": "Y",
+                "description": "eligible and active"
+            },
+            "rawString": "Y"
+        },
+        {
+            "name" : "mwr",
+            "parsed" : {
+                "code": "Y",
+                "description": "eligible and active"
+            },
+            "rawString": "Y"
+        },
+        {
+            "name" : "exchange",
+            "parsed" : {
+                "code": "U",
+                "description": "unlimited"
+            },
+            "rawString": "U"
+        },
+        {
+            "name" : "champusEffectiveDate",
+            "parsed" : {
+                "year": 2010,
+                "month": 11,
+                "day": 17
+            },
+            "rawString": "2010NOV17"
+        },
+        {
+            "name" : "champusExpirationDate",
+            "parsed" : {
+                "year": 2013,
+                "month": 11,
+                "day": 15
+            },
+            "rawString": "2013NOV15"
+        },
+        {
+            "name" : "formNumber",
+            "parsed" : "1173",
+            "rawString": "1173  "
+        },
+        {
+            "name" : "cardIssueDate",
+            "parsed" : {
+                "year": 2010,
+                "month": 11,
+                "day": 17
+            },
+            "rawString": "2010NOV17"
+        },
+        {
+            "name" : "cardExpirationDate",
+            "parsed" : {
+                "year": 2013,
+                "month": 11,
+                "day": 15
+            },
+            "rawString": "2013NOV15"
+        },
+        {
+            "name" : "securityCode",
+            "parsed" : "S   ",
+            "rawString": "S   "
+        },
+        {
+            "name" : "serviceCode",
+            "parsed" : "B",
+            "rawString": "B"
+        },
+        {
+            "name" : "status",
+            "parsed" : {
+                "code": "AD",
+                "description": "Active duty (excluding Guard and Reserve on extended active duty for more than 30 days)"
+            },
+            "rawString": "AD    "
+        },
+        {
+            "name" : "branchOfService",
+            "parsed" : "USN",
+            "rawString": "USN  "
+        },
+        {
+            "name" : "rank",
+            "parsed" : "NON-PO",
+            "rawString": "NON-PO"
+        },
+        {
+            "name" : "payGrade",
+            "parsed" : "E2",
+            "rawString": "E2  "
+        },
+        {
+            "name" : "sponsorName",
+            "parsed" : ["TESLIN", "TESLIN"],
+            "rawString": "       TESLIN, TESLIN      "
+        },
+        {
+            "name" : "sponsorPersonDesignatorIdentifier",
+            "parsed" : 999999999,
+            "rawString": "999999999"
+        },
+        {
+            "name" : "relationship",
+            "parsed" : {
+                "code": "SP",
+                "description": "spouse"
+            },
+            "rawString": "SP    "
+        },
+        {
+            "name" : "jpegData",
+            "parsed" : null,
+            "rawString": "jpeg data encoded in base64 format"
+        }
+	]
+
+Common Fields
+-------------
+
+The following fields are exposed both for the sponsor and the dependent format. Most of the fields can be null.
+Important note: the 'payGrade' field is available since the version 2 of the standard. For the version 1 it is set to null.
+
+.. csv-table::
+    :header-rows: 1
+    :widths: 10, 35, 35
+    :file: us_usid_common.csv
+
+Sponsor Fields
+--------------
+
+The following fields are exposed only for the sponsor type:
+
+.. csv-table::
+    :header-rows: 1
+    :widths: 10, 35, 35
+    :file: us_usid_sponsor.csv
+
+
+Dependent Fields
+----------------
+
+The following fields are exposed only for the dependent type:
+
+.. csv-table::
+    :header-rows: 1
+    :widths: 10, 35, 35
+    :file: us_usid_dependent.csv
+
+Parser Options
+==============
+
+There are no existing options currently.

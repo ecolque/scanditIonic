@@ -1,0 +1,243 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+Get Started With the ID Scanning
+================================
+
+.. module:: scandit.datacapture.parser
+  :hidden:
+
+.. eager-ifconfig:: platform == 'ios' or platform == 'android'
+
+  This guide will briefly explain how to use the Scandit SDK for Id Scanning.
+  Steps covered in this document are  :
+
+  * Add a barcode scanner to read PDF417 barcodes.
+  * Create :doc:`DLID parser <parser/dlid>` to parse that codes.
+  * Add :type:`text capture mode<text.TextCapture>` and use it to scan MRZ.
+  * Create :doc:`MRTD parser<parser/mrtd>` to parse that codes.
+
+  Supported documents
+  -------------------
+  Currently only AAMVA formats are supported for parsing data encoded in PDF417 barcodes. See more in: :doc:`AAMVA Driver License/Identification <parser/dlid>`.
+  List of supported MRTD codes: :doc:`ICAO Machine Readable Travel Document (parser/MRTD) <parser/mrtd>`.
+
+  Add DLID scanner and parser
+  ---------------------------
+
+  First what you need to do is to set a barcode scanner for reading PDF417 barcodes and DLID parser:
+
+  .. sample:: java
+
+    DataCaptureContext dataCaptureContext = DataCaptureContext.forLicenseKey(SCANDIT_LICENSE_KEY)
+    Camera camera = Camera.getDefaultCamera();
+    camera.applySettings(BarcodeCapture.createRecommendedCameraSettings());
+    dataCaptureContext.setFrameSource(camera);
+
+    BarcodeCaptureSettings barcodeCaptureSettings = new BarcodeCaptureSettings();
+    barcodeCaptureSettings.enableSymbology(Symbology.PDF417, true);
+    BarcodeCapture barcodeCapture = BarcodeCapture.forDataCaptureContext(dataCaptureContext, barcodeCaptureSettings);
+
+    Parser parser = Parser.forFormat(dataCaptureContext, ParserDataFormat.DLID);
+
+
+  .. sample:: swift
+
+    let context = DataCaptureContext(licenseKey: licenseKey)
+    let camera = Camera.default
+
+    camera?.apply(BarcodeTracking.recommendedCameraSettings, completionHandler: nil)
+    context.setFrameSource(camera, completionHandler: nil)
+
+    let barcodeCaptureSettings = BarcodeCaptureSettings()
+    barcodeCaptureSettings.set(symbology: .pdf417, enabled: true)
+    barcodeCapture = BarcodeCapture(context: context, settings: barcodeCaptureSettings)
+
+    parser = try Parser(context: context, format: .dlid)
+
+
+  Then you need to |implement| the :type:`barcode.IBarcodeCaptureListener` |interface| and add it to :type:`barcode.BarcodeCapture`:
+
+
+  .. sample:: java
+
+    class MyBarcodeCaptureListener implements BarcodeCaptureListener {
+      @Override
+      public void onBarcodeScanned(
+        @NonNull BarcodeCapture barcodeCapture,
+        @NonNull BarcodeCaptureSession session,
+        @NonNull FrameData frameData
+      ) {
+          if (session.getNewlyRecognizedBarcodes().isEmpty()) return;
+
+          Barcode barcode = session.getNewlyRecognizedBarcodes().get(0);
+          String data = barcode.getData();
+
+          try {
+            ParsedData parsedData = parser.parseString(text);
+            // Do something with parsedData.
+          } catch (RuntimeException e) {
+            message = e.getMessage();
+          }
+        }
+        // Other callbacks omitted for brevity.
+    }
+
+
+  .. sample:: swift
+
+    func barcodeCapture(_ barcodeCapture: BarcodeCapture, didScanIn session: BarcodeCaptureSession, frameData: FrameData) {
+        guard let barcode = session.newlyRecognizedBarcodes.first, let data = barcode.data else { return }
+
+        parser = try! Parser(context: context, format: .dlid)
+        let parsedData = parser.parseString(data)
+
+        // Do something with parsedData.
+    }
+
+  .. sample:: java
+
+    barcodeCapture.addListener(new MyBarcodeCaptureListener());
+
+  .. sample:: swift
+
+    barcodeCapture.addListener(self)
+
+
+  Add MRZ scanner and MRTD parser
+  -------------------------------
+
+  The MRTD parser needs regexes to be specified. You can find the list of regex patterns :doc:`here <parser/mrtd>`.
+
+  .. sample:: java
+
+    String PASSPORT_REGEX = INSERT_REGEX_HERE;
+    String TD1_REGEX = INSERT_REGEX_HERE;
+    String REGEX = "("
+      + PASSPORT_REGEX + "|"
+      + TD1_REGEX
+      // + other regexes...
+      + ")";
+    String CHAR_WHITELIST = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<";
+
+    String SETTINGS_JSON = "{"
+      + "\"regex\" : " + "\"" + REGEX + "\","
+      + "\"characterWhitelist\" : " + "\"" + CHAR_WHITELIST + "\""
+      + "}";
+
+  .. sample:: swift
+
+    let PASSPORT_REGEX = "INSERT_REGEX_HERE"
+    let TD1_REGEX = "INSERT_REGEX_HERE"
+    let REGEX = "(\(PASSPORT_REGEX)|\(TD1_REGEX)|\(other regexes...))"
+    let CHAR_WHITELIST = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<"
+    let SETTINGS_JSON = "{ \"regex\" : \"\(REGEX)\", \"characterWhitelist\" : \"\(CHAR_WHITELIST)\"}"
+
+  You need to set a text capture for reading MRZ and a MRTD parser:
+
+  .. sample:: java
+
+    dataCaptureContext = DataCaptureContext.forLicenseKey(SCANDIT_LICENSE_KEY);
+
+    camera = Camera.getDefaultCamera();
+    camera.applySettings(TextCapture.createRecommendedCameraSettings());
+    dataCaptureContext.setFrameSource(camera);
+
+    TextCaptureSettings textCaptureSettings = TextCaptureSettings.fromJson(SETTINGS_JSON);
+
+    textCapture = TextCapture.forDataCaptureContext(dataCaptureContext, textCaptureSettings);
+
+    parser = Parser.forFormat(dataCaptureContext, ParserDataFormat.MRTD);
+
+
+  .. sample:: swift
+
+    let context = DataCaptureContext(licenseKey: licenseKey)
+    let camera = Camera.default
+
+    camera?.apply(TextCapture.recommendedCameraSettings, completionHandler: nil)
+    context.setFrameSource(camera, completionHandler: nil)
+
+    let textCaptureSettingsJson = SETTINGS_JSON
+
+    let textCaptureSettings = try! TextCaptureSettings(jsonString: textCaptureSettingsJson)
+
+    let textCapture = TextCapture(context: context, settings: textCaptureSettings)
+    parser = try Parser(context: context, format: .mrtd)
+
+  Then you need to |implement| the :type:`text.ITextCaptureListener` |interface| and add it to :type:`text.TextCapture`:
+
+  .. sample:: java
+
+    class MyTextCaptureListener implements TextCaptureListener {
+    @Override
+    public void onTextCaptured(
+      @NotNull TextCapture mode, @NotNull TextCaptureSession session, @NotNull FrameData data
+    ) {
+      //Pause the running TextCapture while processing the captured text.
+      textCapture.setEnabled(false);
+
+      if (session.getNewlyCapturedTexts().isEmpty()) return;
+
+      String text = capturedTexts.get(0).getValue();
+      String message;
+
+      try {
+        ParsedData parsedData = parser.parseString(text);
+        // Do something with parsedData.
+      } catch (RuntimeException e) {
+        message = e.getMessage();
+      }
+
+    }
+
+
+  .. sample:: swift
+
+     func textCapture(_ textCapture: TextCapture, didCaptureIn session: TextCaptureSession, frameData: FrameData) {
+        //Pause the running TextCapture while processing the captured text.
+        textCapture.isEnabled = false
+        guard let text = session.newlyCapturedTexts.first?.value else {
+          self.textCapture.isEnabled = true
+          return
+        }
+
+        let message: String
+        do {
+          let parsedData = try parser.parseString(text)
+          message = parsedData.fields.reduce("") { (result, field) -> String in
+              guard let parsed = field.parsed else { return result }
+              return "\(result) \n\(field.name): \(parsed)"
+          }
+        } catch {
+          message = error.localizedDescription
+        }
+
+        // Show the parsed data.
+        DispatchQueue.main.async {
+          let alert = UIAlertController(title: "Parser result", message: message, preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            self.textCapture.isEnabled = true
+          }))
+          self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+
+  .. sample:: java
+
+    textCapture.addListener(new MyTextCaptureListener());
+
+  .. sample:: swift
+
+    textCapture.addListener(self)
+
+  Additional information
+  ----------------------
+
+  For details, you can refer:
+
+  * :doc:`get-started-barcode`
+  * :doc:`get-started-text-capture`
+  * :doc:`get-started-parser`

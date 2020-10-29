@@ -1,0 +1,28 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+ScanditIdCapture API
+======================
+
+.. module:: scandit.datacapture.id
+  :hidden:
+
+.. toctree::
+  :hidden:
+  :glob:
+
+  api/*
+
+.. eager-ifconfig:: platform == 'android'
+
+    .. hlist::
+
+      * :type:`CapturedId`
+      * :type:`CapturedIdField`
+      * :type:`IdCapture`
+      * :type:`IIdCaptureListener`
+      * :type:`IdCaptureSession`
+      * :type:`IdCaptureSettings`
+      * :type:`IdImageType`
+

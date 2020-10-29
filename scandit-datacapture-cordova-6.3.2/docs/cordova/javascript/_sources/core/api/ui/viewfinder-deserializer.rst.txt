@@ -1,0 +1,41 @@
+Viewfinder Deserializer
+=======================
+
+.. module:: scandit.datacapture.core.ui
+  :android-package: com.scandit.datacapture.core.ui.serialization
+
+.. warning::
+
+  The deserialization API is not yet stable and will still change over the coming releases.
+
+.. note::
+
+  This deserializer is not thread-safe, subsequent calls for the same viewfinder have to be called on the same thread.
+
+.. class:: ViewfinderDeserializer
+  @objc@ SDCViewfinderDeserializer : NSObject
+  :available: android=6.3, ios=6.3
+
+  A deserializer to construct viewfinders from JSON.
+
+  **Related topics**: :doc:`/core/serialization`.
+
+  .. method:: ViewfinderDeserializer()
+    @objc@ + (nonnull instancetype)viewfinderDeserializer
+    :available: android=6.3, ios=6.3
+
+    Creates a new deserializer object.
+
+  .. property:: IList<String> Warnings { get; }
+    @objc@ @property (nonatomic, readonly) NSArray<NSString *> *warnings
+    :available: android=6.3, ios=6.3
+
+    The warnings produced during deserialization, for example which properties were not used during deserialization.
+
+  .. method:: IViewfinder ViewfinderFromJson(String jsonData)
+    @objc@ - (nullable id<SDCViewfinder>)viewfinderFromJSONString:(nonnull NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Deserializes a viewfinder from JSON. 
+    
+    .. include:: /core/deserialization-exception.txt

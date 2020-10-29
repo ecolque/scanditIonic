@@ -1,0 +1,25 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+ScanditTextCapture
+==================
+
+.. module:: scandit.datacapture.text
+  :hidden:
+
+.. eager-ifconfig:: platform == 'ios' or platform == 'android'
+
+  *ScanditTextCapture* implements the text capture capabilities of the |sdk|.
+
+  .. note::
+
+    Just getting started? Have a look at :doc:`our samples</run-samples>`, or directly :doc:`get started by adding text capture to your app</get-started-text-capture>`.
+
+
+  .. toctree::
+    :hidden:
+    :glob:
+
+    Settings Json Structure<json-structure>
+    API<api>

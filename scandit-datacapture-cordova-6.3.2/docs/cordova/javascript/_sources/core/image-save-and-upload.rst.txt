@@ -1,0 +1,368 @@
+:orphan:
+
+Frame Save and Upload
+=====================
+
+Frame save and upload capability is based on three concepts: (1) deciding what
+to save, (2) buffering the frames and (3) storing the frames.
+
+Making a decision what should be saved, when and how
+
+   * **what:** full frame vs. region of interest
+   * **when:** current frame vs. next frame
+   * **how:** burst of last N frames vs. sequence of consecutive frames
+
+Enqueueing frames
+
+   * For small storage sizes the buffer could be kept in memory
+   * For large storage sizes the buffer would be written to the disk
+   * Burst of frames
+      * The size of the storage buffer is fixed and implies the number of N
+        latest frames that are to be saved
+      * More frames can be added to the storage buffer than is its size. If the
+        buffer fills up then the oldest frames will be dropped from the queue
+   * Sequence of frames
+      * All consecutive frames in the given sequence will be added to the
+        storage buffer
+      * The size of the storage buffer is not fixed as it can be difficult to
+        determine the appropriate buffer size beforehand
+
+Dequeueing frames
+
+   * The storage location can be on the device itself or on the server
+   * Processing the queue works the same for both the local storage and the
+     server
+   * It makes possible to save locally a sequence of large frames that could
+     not be saved synchronously in real time without affecting the frame
+     rate
+   * If the storage is on the local device then the dequeueing operation could
+     be skipped depending on whether (and how) the frames were buffered to
+     memory or disk
+
+.. module:: scandit.datacapture.core
+
+.. struct:: FrameData
+    :available: none
+
+    Defined elsewhere. Included here for completeness.
+
+.. struct:: Json
+    :available: none
+
+    Defined elsewhere. Included here for completeness.
+
+.. enum:: FrameStorageFormat
+    :available: none
+
+    .. value:: Raw
+        :available: none
+
+        This implies that the corresponding `.sc_prop` data will be saved side
+        by side with the `.sc_raw` data.
+
+    .. value:: Png
+        :available: none
+
+    .. value:: Jpeg
+        :available: none
+
+.. enum:: FrameStorageLocation
+    :available: none
+
+    .. value:: Device
+        :available: none
+
+        Frames will be saved locally on the device itself.
+
+    .. value:: Server
+        :available: none
+
+        Frames will be uploaded to the server.
+
+.. struct:: FrameStorageConfiguration
+    :available: none
+
+    .. property:: ISet<FrameStorageFormat> Formats { get; set; }
+        :available: none
+
+        TODO: Do we have a use case where the formats would be an empty set?
+
+        Empty set would imply that nothing would be saved as no storage format
+        is defined.
+
+    .. property:: FrameStorageLocation Location { get; set; }
+        :available: none
+
+.. struct:: BurstModeConfiguration : FrameStorageConfiguration
+    :available: none
+
+    .. property:: int BufferSize { get; set; }
+        :available: none
+
+        Setting negative values would throw error at runtime as size should be
+        zero or a positive integer.
+
+        TODO: Do we have a use case where size would be set to zero?
+
+        Value of 0 would mean that the buffer will not accept any frames. In
+        practice, it would mean that nothing is saved.
+
+.. struct:: SequenceModeConfiguration : FrameStorageConfiguration
+    :available: none
+
+    TODO: Do we need this type now?
+
+    At the moment there are no Sequence Mode specific configuration parameters.
+
+.. enum:: FrameStorageTaskState
+    :available: none
+
+    TODO: What if there is an error and there are frames left to be uploaded?
+
+    Is it possible to restart the processing or not? What about the retry
+    strategy? What about trying again later? Should that be automatic or
+    triggered via the API?
+
+    .. value:: Started
+        :available: none
+
+        Can be Stopped, Cancelled or Completed.
+
+    .. value:: Stopped
+        :available: none
+
+        Can be Started or Cancelled.
+
+    .. value:: Cancelled
+        :available: none
+
+        Final state. All remaining frames have been removed.
+
+    .. value:: Completed
+        :available: none
+
+        Final state. Successfully completed.
+
+.. struct:: FrameStorageError
+    :available: none
+
+.. class:: FrameStorageTask
+    :available: none
+
+    .. property:: FrameStorageTaskState State { get; }
+        :available: none
+
+    .. property:: FrameStorageError? Error { get; }
+        :available: none
+
+    .. property:: Int FramesLeft { get; }
+        :available: none
+
+    .. method:: bool Start()
+        :available: none
+
+        Task would be in started when created, but this could be used to restart
+        a resurrected task or when the app resumes working.
+
+    .. method:: bool Stop()
+        :available: none
+
+        Stop processing. Can be started again.
+
+    .. method:: bool Cancel()
+        :available: none
+
+        Stop the task, remove all remaining frames from the queue and set status
+        to Cancelled. It is not possible to resume a task that has been
+        cancelled.
+
+.. interface:: IFrameStorageDelegate
+    :available: none
+
+    .. method:: void DidComplete(FrameStorageTask task)
+        :available: none
+
+.. class:: FrameSaveSession
+    :available: none
+
+    .. property IFramseStorageDelegate? Delegate { get; set; }
+        :available: none
+
+.. class:: BurstModeSaveSession : FrameSaveSession
+    :available: none
+
+    TODO: What should happen if Save is called faster than queue is processed?
+
+    Should we have a collection of FrameStorageTasks and each of them having
+    a buffer of images to be uploaded?
+
+    .. method:: BurstModeSaveSession(BurstModeConfiguration configuration)
+        :available: none
+
+    .. method:: FrameStorageTask Save()
+        :available: none
+
+        TODO: Should we return optional FrameStorageTask?
+
+        For example, if it is not possible to create a new storage queue,
+        because of the earlier one is still being processed.
+
+.. class:: SequenceModeSaveSession : FrameSaveSession
+    :available: none
+
+    TODO: What should happen if Start & Stop are called faster than queue is processed?
+
+    Should we have a collection of FrameStorageTasks and each of them having
+    a buffer of images to be uploaded?
+
+    Or should we limit that there can be just one FrameStorageTask and now new
+    task can be started before the previous one is completed or cancelled.
+
+    .. method SequenceModeSaveSession(SequenceModeConfiguration configuration)
+        :available: none
+
+    .. method:: bool Start()
+        :available: none
+
+        TODO: Could this return FrameStorageTask in future?
+
+        Can we return the task while buffering frames to be saved? We might be
+        able to start uploading already when the first frames arrive.
+
+        But for now it is simpler to start just buffering the frames on Start
+        and return the task on Stop.
+
+    .. method:: FrameStorageTask Stop()
+        :available: none
+
+.. interface:: IFrameDataConverter
+    :available: none
+
+    .. method:: IList<Data> Convert(FrameData Frame, FrameStorageFormat format)
+        :available: none
+
+        TODO: Do we already have this capability somewhere?
+
+        Convert the given Frame to the desired format and return a contiguous
+        array of bytes. Convert only to `.png` and `.jpeg`.
+
+        This is mostly likely not needed by the users of **Frame Save and Upload**,
+        but will be needed in FrameStorageQueue. Conversion to `.png` and `.jpeg`
+        will be delegated to the native implementations on Android and iOS.
+
+.. interface:: IFrameLocalStorage
+    :available: none
+
+    .. method:: bool Save(String Name, FrameData Frame, Json MetaData)
+        :available: none
+
+        TODO: Do we already have this capability somewhere?
+
+Code example to illustrate the workflow
+
+.. code-block:: cpp
+
+    // This lambda illustrates that it is possible to get signal when the
+    // storage task has been completed. All details are omitted.
+    auto waitFor = [](Delegate d) -> void {
+        return /* when the delegate is ready */ ;
+    };
+
+    class Delegate : IFrameStorageDelegate {
+    public:
+        void didComplete(FrameStorageTask task) override {
+            // Storage queue processed successfully. Details omitted.
+            ready_ = true;
+        }
+
+        void isReady() {
+            return ready_;
+        }
+
+    private:
+        bool ready_ = false;
+    };
+
+    // Use Case 1: Burst Mode
+    {
+        // Create a session that uploads frames as Raw files to the server. The
+        // session has a circular buffer to keep the 3 latest frames.
+        auto buffer_size = 3;
+        BurstModeConfiguration configuration(
+            FrameStorageFormat::Raw,
+            FrameStorageLocation::Server,
+            buffer_size
+            );
+
+        // Calling the contructor of BurstModeSaveSession could trigger the
+        // an asynchronous process that starts adding frames to the storage
+        // queue.
+        auto delegate = Delegate{ };
+        BurstModeSaveSession burst_mode(delegate, configuration);
+
+        // Nothing is uploaded at this point. Frames are just added to the queue
+        // to be uploaded later. There needs to some event that triggers the
+        // burst mode to start saving.
+        auto task_1 = burst_mode.save(); // Triggers the uploading task
+
+        // It is possible that new frames are still added to the queue, while
+        // the task is running but those new frames are not included in the set
+        // that is uploaded to the server.
+        waitFor( delegate );
+        assert ( FrameStorageTask::Completed == task_1.getState );
+
+        // The previous task has been completed successfully and now we trigger
+        // a second collection of frames to be uploaded. Although, this session
+        // goes out of scope the upload task would still continue processing.
+        auto task_2 = burst_mode.save();
+    }
+
+    // Use Case 2: Sequence mode
+    {
+        // Create a session that uploads a sequence of frames as Raw files to
+        // the server.
+        SequenceModeConfiguration configuration(
+            FrameStorageFormat::Raw,
+            FrameStorageLocation::Server,
+            );
+
+        auto delegate = Delegate{ };
+        SequenceModeSaveSession sequence_mode(delegate, configuration);
+
+        // No frames are enqueued until the sequence is explicitly started
+        sequence_mode.start(); // Start adding frames to the queue asynchronously
+
+        // Nothing is uploaded at this point. Frames are just queued to be
+        // uploaded. Something happens that stops the saving of the sequence.
+        // While this session goes out of scope, the upload task would still
+        // continue processing.
+        auto task = sequence_mode.stop();
+    }
+
+Implementation details.
+
+.. code-block:: cpp
+
+    // FrameStorageQueue would be responsible for processing the queue, that is,
+    // pop items and save them either locally or upload to the server.
+    //
+    // TODO: Who owns the FrameStorageQueue and manages its lifetime?
+    //
+    class FrameStorageQueue
+    {
+    public:
+        // Called in the context where FrameData is available
+        //
+        // Returns `true` if the data was added to the queue successfully.
+        // The returned `true` does not mean that the frame data has
+        // been processed and saved successfully.
+        //
+        // The meta data is the free form Json object that can be added to the
+        // Image Submission API Request.
+        bool enqueue(FrameData frame, Json meta_data);
+    };
+
+    // Internally an id is needed when saving the sequence of frames. The type
+    // is "typedeffed" here to unsigned int, but in the first round it could be
+    // mapped to timestamp.
+    using FrameSequenceId = unsigned int /* or type_of_timestamp */;

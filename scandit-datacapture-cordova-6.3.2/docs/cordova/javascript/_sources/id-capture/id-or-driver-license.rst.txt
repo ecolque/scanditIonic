@@ -1,0 +1,26 @@
+***************************
+Id cards and Driver license
+***************************
+
+Overview
+========
+
+The Scandit Id Capture supports scanning and parsing various ID card and driver's license formats.
+
+Id cards/US Driving License
+===========================
+
+Fields
+-------------
+
+.. csv-table::
+    :header-rows: 1
+    :widths: 10, 55, 35
+    :file: id-or-driver-license-fields.csv
+
+with YYYY (0 if date is not recognized or missing), MM (in range 1 (January)-12 (December), 0 if date is partial and month is not recognized or missing), DD (day of the month. 0 if date is partial and day is not recognized or missing) as integers. Entries are omitted from the dictionary if they are not specified by the input.
+
+.. csv-table::
+    :header-rows: 1
+    :widths: 10, 55, 35
+    :file: mrz-fields.csv

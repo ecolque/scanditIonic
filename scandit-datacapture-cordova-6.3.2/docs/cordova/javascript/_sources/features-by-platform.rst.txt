@@ -1,0 +1,617 @@
+:orphan:
+
+Features By Platform
+====================
+
+Core
+----
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 4 4 4 4 4
+
+  * - Feature
+    - iOS
+    - Android
+    - Cordova
+    - Xamarin iOS
+    - Xamarin Android
+
+  * -
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - **UI**
+    -
+    -
+    -
+    -
+    -
+
+  * - Scaled/Cropped View
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - Draw On Top Of View
+    - 6.0
+    - 6.0
+    - 6.3
+    - 6.2
+    - 6.2
+
+  * - Move Logo
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - Torch On/Off Control
+    - 6.0
+    - 6.0
+    -
+    - 6.2
+    - 6.2
+
+  * - Camera Switch Control
+    -
+    -
+    -
+    -
+    -
+
+  * - Icon Customization of Controls
+    - 6.2
+    - 6.2
+    -
+    - 6.2
+    - 6.2
+
+  * - Location Customization of Controls
+    -
+    -
+    -
+    -
+    -
+
+  * - **Viewfinders**
+    -
+    -
+    -
+    -
+    -
+
+  * - Rectangular
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - Laserline
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - Spotlight
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - **Camera**
+    -
+    -
+    -
+    -
+    -
+
+  * - HD & FullHD
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - 4K
+    - 6.0
+    - 6.1 :ref:`[1]<by-feature-special-remarks>`
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - Camera API 2 :ref:`[2]<by-feature-special-remarks>`
+    - n/a
+    - 6.1
+    - 6.1
+    - n/a
+    - 6.2
+
+  * - Focus & Exposure On Point Of Interest
+    - 6.1
+    - 6.1
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - Zoom
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - Camera Frame Access
+    - 6.0
+    - 6.0
+    -
+    - 6.2
+    - 6.2
+
+  * - Fixed Focus :ref:`[1][2]<by-feature-special-remarks>`
+    - 6.0
+    - 6.1
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - USB Camera
+    -
+    -
+    -
+    -
+    -
+
+  * - Image (Non-Camera) Processing
+    - 6.3
+    - 6.3
+    -
+    -
+    -
+
+  * - **Camera Interaction**
+    -
+    -
+    -
+    -
+    -
+
+  * - Focus on Touch
+    -
+    -
+    -
+    -
+    -
+
+  * - Pinch to Zoom
+    -
+    -
+    -
+    -
+    -
+
+  * - **Additional APIs**
+    -
+    -
+    -
+    -
+    -
+
+  * - Image Capture & Upload API
+    -
+    -
+    -
+    -
+    -
+
+
+Barcode Capture
+---------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 4 4 4 4 4
+
+  * - Feature
+    - iOS
+    - Android
+    - Cordova
+    - Xamarin iOS
+    - Xamarin Android
+
+  * -
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - **Scanning**
+    -
+    -
+    -
+    -
+    -
+
+  * - Extension Codes
+    -
+    -
+    -
+    -
+    -
+
+  * - Composite Codes
+    -
+    -
+    -
+    -
+    -
+
+  * - **Location Selection / Area Restriction**
+    -
+    -
+    -
+    -
+    -
+
+  * - :type:`Radius<scandit.datacapture.core.RadiusLocationSelection>`
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - :type:`Rectangular<scandit.datacapture.core.RectangularLocationSelection>`
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - **UI**
+    -
+    -
+    -
+    -
+    -
+
+  * - :type:`Overlay<scandit.datacapture.barcode.ui.BarcodeCaptureOverlay>` (Barcode Highlights)
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - **Feedback**
+    -
+    -
+    -
+    -
+    -
+
+  * - Beep on Scan
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - Vibrate on Scan
+    - 6.0
+    - 6.0
+    - 6.1
+    - 6.2
+    - 6.2
+
+  * - **Workflow**
+    -
+    -
+    -
+    -
+    -
+
+  * - Code Rejection (Sample)
+    - 6.1
+    - 6.1
+    -
+    -
+    -
+
+
+Barcode Tracking (MatrixScan)
+-----------------------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 4 4 4 4 4
+
+  * - Feature
+    - iOS
+    - Android
+    - Cordova
+    - Xamarin iOS
+    - Xamarin Android
+
+  * -
+    - 6.0
+    - 6.0
+    - 6.2
+    - 6.2
+    - 6.2
+
+  * - **Scanning**
+    -
+    -
+    -
+    -
+    -
+
+  * - 1D Codes
+    - 6.0
+    - 6.0
+    - 6.2
+    - 6.2
+    - 6.2
+
+  * - QR & DataMatrix
+    - 6.0
+    - 6.0
+    - 6.2
+    - 6.2
+    - 6.2
+
+  * - Extension Codes
+    -
+    -
+    -
+    -
+    -
+
+  * - Composite Codes
+    -
+    -
+    -
+    -
+    -
+
+  * - **UI**
+    -
+    -
+    -
+    -
+    -
+
+  * - :type:`Overlay<scandit.datacapture.barcode.tracking.ui.BarcodeTrackingBasicOverlay>` (Barcode Highlights)
+    - 6.0
+    - 6.0
+    - 6.2
+    - 6.2
+    - 6.2
+
+  * - Overlay (Animated Views)
+    - 6.0
+    - 6.0
+    - 6.2
+    - 6.2
+    - 6.2
+
+  * - **Feedback**
+    -
+    -
+    -
+    -
+    -
+
+  * - Manual Beep on Scan :ref:`[3]<by-feature-special-remarks>`
+    - 6.0
+    - 6.0
+    - 6.3
+    - 6.2
+    - 6.2
+
+  * - Manual Vibrate on Scan :ref:`[3]<by-feature-special-remarks>`
+    - 6.0
+    - 6.0
+    - 6.3
+    - 6.2
+    - 6.2
+
+
+Text Capture
+------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 4 4 4 4 4
+
+  * - Feature
+    - iOS
+    - Android
+    - Cordova
+    - Xamarin iOS
+    - Xamarin Android
+
+  * -
+    - 6.1
+    - 6.1
+    -
+    -
+    -
+
+  * - **Location Selection / Area Restriction**
+    -
+    -
+    -
+    -
+    -
+
+  * - :type:`Radius<scandit.datacapture.core.RadiusLocationSelection>`
+    -
+    -
+    -
+    -
+    -
+
+  * - :type:`Rectangular<scandit.datacapture.core.RectangularLocationSelection>`
+    - 6.1
+    - 6.1
+    -
+    -
+    -
+
+  * - **UI**
+    -
+    -
+    -
+    -
+    -
+
+  * - Basic Overlay (No Highlights)
+    - 6.1
+    - 6.1
+    -
+    -
+    -
+
+  * - **Feedback**
+    -
+    -
+    -
+    -
+    -
+
+  * - Beep on Scan
+    - 6.1
+    - 6.1
+    -
+    -
+    -
+
+  * - Vibrate on Scan
+    - 6.1
+    - 6.1
+    -
+    -
+    -
+
+
+Label Capture
+-------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 4 4 4 4 4
+
+  * - Feature
+    - iOS
+    - Android
+    - Cordova
+    - Xamarin iOS
+    - Xamarin Android
+
+  * -
+    - 6.0
+    - 6.0
+    -
+    -
+    -
+
+  * - **UI**
+    -
+    -
+    -
+    -
+    -
+
+  * - Basic Overlay (Form Highlight)
+    - 6.0
+    - 6.0
+    -
+    -
+    -
+
+  * - **Feedback**
+    -
+    -
+    -
+    -
+    -
+
+  * - Manual Beep on Scan :ref:`[3]<by-feature-special-remarks>`
+    - 6.0
+    - 6.0
+    -
+    -
+    -
+
+  * - Manual Vibrate on Scan :ref:`[3]<by-feature-special-remarks>`
+    - 6.0
+    - 6.0
+    -
+    -
+    -
+
+
+Parser
+------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 4 4 4 4 4
+
+  * - Feature
+    - iOS
+    - Android
+    - Cordova
+    - Xamarin iOS
+    - Xamarin Android
+
+  * -
+    - 6.1
+    - 6.1
+    - 6.3
+    -
+    -
+
+
+Barcode Generator
+-----------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 4 4 4 4 4
+
+  * - Feature
+    - iOS
+    - Android
+    - Cordova
+    - Xamarin iOS
+    - Xamarin Android
+
+  * -
+    -
+    -
+    -
+    -
+    -
+
+
+Special Remarks
+---------------
+
+.. _by-feature-special-remarks:
+
+[1] Requires camera API 2 to be enabled.
+
+[2] To use the camera API 2 please contact us at support@scandit.com.
+
+[3] Manual feedback means that the SDK does not provide a strategy to automatically trigger the feedback, instead the user of the SDK has to decide when to trigger it, but the SDK provides functionality to easily do so.

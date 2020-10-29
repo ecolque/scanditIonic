@@ -1,0 +1,209 @@
+|sdk| 6.2 Release Notes (March 20th 2020)
+=========================================
+
+.. module:: scandit.datacapture.core
+  :hidden:
+
+Compatibility
+-------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5
+
+  * - Platform
+    - Minimum Version
+
+  * - Android
+    - Android 4.4 (API level 19)
+
+  * - iOS
+    - iOS 9.0 [1]
+
+  * - Cordova
+    -  - `cordova <https://www.npmjs.com/package/cordova>`_ 8.0.0
+       - `cordova-ios <https://www.npmjs.com/package/cordova-ios>`_ 4.5.5
+       - `cordova-android <https://www.npmjs.com/package/cordova-android>`_ 7.0.0
+       - iOS 9.0 and Swift 4
+       - Android 5.0 (API level 20)
+
+  * - Xamarin.iOS
+    - - iOS 9.0
+      - `Xamarin.iOS <https://docs.microsoft.com/en-us/xamarin/ios/release-notes/13/13.10>`_ 13.10
+
+  * - Xamarin.Android
+    - Android 4.4 (API level 19)
+
+[1] :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay` has a minimum version of iOS 10.0
+
+See also the :doc:`System Requirements</requirements>`.
+
+|
+|
+
+.. eager-ifconfig:: platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  Version 6.2 marks the initial release of |sdk| for Xamarin.iOS and Xamarin.Android. It is a major update over the 5.x Scandit SDK and introduces new APIs and additional features. This release is not compatible with 5.x and will require code changes in your application. Take a look at our :doc:`migration guide </migrate-to-6>` for how to upgrade your app from 5.x to 6.x.
+
+New Features
+------------
+
+.. eager-ifconfig:: platform == 'android'
+
+  * Added support to configure Codabar codes with less than three data symbols.
+  * Increased the maximum supported symbol count for Code93 from 40 to 60.
+  * Added :meth:`barcode.tracking.BarcodeTrackingSession.ToJson` and :meth:`barcode.tracking.TrackedBarcode.ToJson`.
+  * Added methods to customize the appearance of :type:`core.ui.TorchSwitchControl`.
+  * Removed `Highest` :type:`core.VideoResolution` enum value.
+  * Added :meth:`core.DataCaptureContext.RemoveAllModes`.
+  * GS1 parser: Invalid AIs and AI data that is too small no longer abort parsing if strictMode is disabled. Instead a result is returned along with a relevant error message.
+  * MRTD parser: Checking if issuing country and nationality fields are valid.
+  * Added nationality and documentNumber fields for machine readable zones of French national identity cards.
+  * SwissQr parser: Added support for parsing addresses provided in a combined form for 2.0 and 2.1 standards.
+
+.. eager-ifconfig:: platform == 'ios'
+
+  * Added support to configure Codabar codes with less than three data symbols.
+  * Increased the maximum supported symbol count for Code93 from 40 to 60.
+  * Added :meth:`barcode.tracking.BarcodeTrackingSession.ToJson` and :meth:`barcode.tracking.TrackedBarcode.ToJson`.
+  * Added methods to customize the appearance of :type:`core.ui.TorchSwitchControl`.
+  * Removed `Highest` :type:`core.VideoResolution` enum value.
+  * Added :meth:`barcode.SymbologySettings.IsExtensionEnabled`.
+  * All Add/RemoveListener methods now require a `nonnull` listener.
+  * Added getter for |sdk| version :prop:`core.DataCaptureVersion.Version`.
+  * GS1 parser: Invalid AIs and AI data that is too small no longer abort parsing if strictMode is disabled. Instead a result is returned along with a relevant error message.
+  * MRTD parser: Checking if issuing country and nationality fields are valid.
+  * Added nationality and documentNumber fields for machine readable zones of French national identity cards.
+  * SwissQr parser: Added support for parsing addresses provided in a combined form for 2.0 and 2.1 standards.
+
+.. eager-ifconfig:: platform == 'cordova'
+
+  * Added MatrixScan functionality with the :type:`barcode.tracking.BarcodeTracking` mode.
+  * Added support to configure Codabar codes with less than three data symbols.
+  * Increased the maximum supported symbol count for Code93 from 40 to 60.
+  * Added getter for plugin version :prop:`core.DataCaptureVersion.PluginVersion`.
+
+.. eager-ifconfig:: platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  * Modernized and modularized API for more fine-grained control and better extensibility for future data capture technologies.
+  * Improved use of multi core architectures of mobile devices with speedup of 2-3x depending on settings and number of cores.
+  * Simplified interface for :doc:`configuring the scan area and code selection </scan-area>`.
+
+.. eager-ifconfig:: internal
+  
+  Internal
+  ^^^^^^^^
+
+  * New `conv_net_localization_max_input_area_size` hidden property. This is a new hidden property controlling the ML localization pipeline. This property controls the max size of the input that is passed to the neural network. The larger input will be scaled down to fit this size.
+  * BlinkInput-based OCR backend now honors `minimumLineHeight` setting.
+  * BarcodeTrackingSession and BarcodeCaptureSession serialization: added frameSequenceId field.
+  * Highest resolution can be set in `core.source.CameraSettings` by setting hidden property called overwrite_with_highest_resolution to true.
+  * Added Brush deserialization.
+  * Added exposureTargetBias hidden property to :type:`core.CameraSettings`.
+
+  .. eager-ifconfig:: platform == 'xamarin.ios'
+
+    * Added :prop:`barcode.capture.BarcodeCapture.PointOfInterest` to :type:`barcode.capture.BarcodeCapture` mode.
+    * Added :prop:`barcode.capture.BarcodeCaptureOverlay.SetProperty` to :type:`barcode.capture.BarcodeCaptureOverlay` overlay.
+
+Behavioral Changes
+------------------
+
+.. eager-ifconfig:: platform != 'xamarin.android' and platform != 'xamarin.ios'
+
+  * Previously when disabling :type:'barcode.BarcodeCapture' the session was not cleared. This has been changed such that every disabling of the capture mode clears the session as sessions are not meant to span over multiple enabling and disabling of a capture mode. Make sure that you are handling this correctly, especially when:
+  
+   * You set the :prop:`duplicate filter<barcode.BarcodeCaptureSettings.CodeDuplicateFilter>` to -1. Barcodes will be scanned again after disabling and re-enabling the mode.
+   * You are for some reason disabling and re-enabling :type:'barcode.BarcodeCapture' during the callback. Make sure this is really needed and adjust your logic if it was dependent on the session never ending.
+
+.. eager-ifconfig:: platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  This section contains a list of behavioral changes between 5.x and 6.0.
+
+  * The short 43 character legacy app keys supported in 4.x and 5.x have been deprecated and are not compatible with 6.0 anymore. Please contact support@scandit.com to get your new license keys.
+  * It is now an error to enable symbologies that are not supported by your app key. In 5.x, these symbologies would silently be disabled without any warning.
+  * EAN13 and UPCA used to be separate symbologies in Scandit SDK 5.x, but are now merged into one symbology called :enum:`EAN13/UPCA <barcode.Symbology.Ean13Upca>`.
+  * Barcode capture: The default :prop:`code duplicate filter <barcode.BarcodeCaptureSettings.CodeDuplicateFilter>` has been changed from 500ms to 0ms, meaning that codes that are scanned are reported every frame.
+
+Performance Improvements
+------------------------
+
+* Significantly improved PDF417 recognition. The PDF417 reader is now better at:
+
+  * Handling PDF417 codes for which both the start and end delimiter patterns are heavily damaged.
+  * Dealing with erasures and codes that are slightly bent.
+  * Handling codes close to the camera's resolution limit.
+
+Bug Fixes
+---------
+
+.. eager-ifconfig:: platform == 'android'
+
+  * Focusing and adjusting exposure on the :prop:`point of interest<core.ui.DataCaptureView.PointOfInterest>` was not working correctly for certain focusing strategies. It now works correctly for all devices that support it.
+  * Fixed an issue that caused the barcode scanner to crash upon decoding a PDF417 code with a macro control block without optional fields.
+  * Fixed the initial "fly-in" of the view animations in the :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay`.
+  * Fixed an issue with changing the brush and with returning the default brush even if a listener specified a different brush for :type:`barcode.tracking.ui.BarcodeTrackingBasicOverlay`.
+  * Fixed an issue where the viewfinder didn't change its center when the scan area margins were changed.
+  * Fixed a crash that would sometimes occur when setting scan area margins.
+  * DLID parser: Fixed issue with parsing multiple DLID codes using the same parser instance.
+  * GS1 parser: Fixed an issue that caused a crash when parsing data containing non-ASCII characters.
+
+.. eager-ifconfig:: platform == 'ios'
+
+  * Fixed a bug that prevented autofocus from being restored to the default value after using |sdk|.
+  * Fixed an issue that caused the barcode scanner to crash upon decoding a PDF417 code with a macro control block without optional fields.
+  * Fixed an issue with changing the brush and with returning the default brush even if a listener specified a different brush for :type:`barcode.tracking.ui.BarcodeTrackingBasicOverlay`.
+  * Fixed an issue where the viewfinder didn't change its center when the scan area margins were changed.
+  * Fixed a crash that would sometimes occur when setting scan area margins.
+  * Fixed an issue with :meth:`barcode.BarcodeCaptureFeedback.FromJson`.
+  * Fixed a rare bug that caused the application to crash while running in the background.
+  * DLID parser: Fixed issue with parsing multiple DLID codes using the same parser instance.
+ 
+.. eager-ifconfig:: platform == 'cordova'
+
+  * Fixed an issue that caused the barcode scanner to crash upon decoding a PDF417 code with a macro control block without optional fields.
+  * Fixed an issue where installing the plugin in a project on a Windows development machine failed
+  * Fixed an issue with changing the brush and with returning the default brush even if a listener specified a different brush for :type:`barcode.tracking.ui.BarcodeTrackingBasicOverlay`.
+  * Fixed an issue where the viewfinder didn't change its center when the scan area margins were changed.
+  * Fixed an issue on Android that would cause scanning to stop after putting the app in the background and opening again.
+  * Fixed an issue related to a deadlock that would cause the app to be unresponsive.
+
+.. eager-ifconfig:: internal
+
+  Internal
+  ^^^^^^^^
+
+  * Fixed an issue that was causing a crash when trying to parse strings that can't be encoded in UTF8.
+  * Fixed a crash happening when the device doesn't suppoort smooth auto focus.
+  * Fixed multiple crashes when running :type:`barcode.tracking.BarcodeTracking` mode.
+  * The avoidThreadDependencies flag of the context deserializer has been fixed. Previously it only avoided one of the two dependencies.
+  * [Android] Fixed minimum line height calculation in TextCapture doesn't take scanning region into account.
+  * [Android] Fixed potential crash when removing a DataCaptureMode from a DataCaptureContext.
+  * [Android] Fixed an issue where :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay` ignored tracked barcode views visibility set by the user.
+  * Samsung Galaxy Note 10 and Samsung Xcover Pro are marked as secretly supporting fixed focus.
+
+Deprecations
+------------
+
+No deprecations have been made up to this point.
+
+Updates
+-----------------------
+
+Bugfixes in |sdk| 6.2.2 (April 15th 2020)
+-----------------------------------------
+
+* Fixed a very rare infinite loop in the QR code reader.
+
+Bugfixes in |sdk| 6.2.1 (March 26th 2020)
+-----------------------------------------
+
+.. eager-ifconfig:: platform != 'cordova'
+
+  No changes have been made for this platform.
+
+.. eager-ifconfig:: platform == 'cordova'
+
+  * Fixed an issue that caused unnecessary architectures to be part of iOS exports.
+  * Fixed an issue with Swift 5.
+  

@@ -1,0 +1,53 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+ScanditTextCapture API
+======================
+
+.. module:: scandit.datacapture.text
+  :hidden:
+
+.. eager-ifconfig:: platform == 'ios' or platform == 'android'
+
+  .. toctree::
+    :hidden:
+    :glob:
+
+    api/*
+    api/ui/*
+
+  .. hlist::
+
+    * :type:`TextCapture`
+    * :type:`TextCaptureSession`
+    * :type:`ITextCaptureListener`
+    * :type:`TextCaptureSettings`
+    * :type:`ui.TextCaptureOverlay`
+    * :type:`TextCaptureFeedback`
+    * :type:`CapturedText`
+
+Deserialization
+---------------
+
+.. eager-ifconfig:: platform == "cordova"
+
+  The deserialization API is not available for Cordova.
+
+.. eager-ifconfig:: platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  The deserialization API is not available for Xamarin.
+
+.. eager-ifconfig:: platform == "ios"
+
+  The deserialization API is not available for iOS.
+
+.. eager-ifconfig:: platform == "android"
+
+  .. warning::
+
+    The deserialization API is not yet stable and will still change over the coming releases.
+
+  .. hlist::
+
+    * :type:`TextCaptureDeserializer`

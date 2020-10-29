@@ -1,0 +1,47 @@
+Id Capture Settings
+======================
+
+.. module:: scandit.datacapture.id
+  :android-package: com.scandit.datacapture.id.capture
+
+.. class:: IdCaptureSettings
+  @objc@ SDCIdCaptureSettings : NSObject <NSCopying>
+  :available: android=6.2, ios=6.2
+
+  .. method:: IdCaptureSettings()
+    @objc@ + (instancetype)settings
+    :available: android=6.2, ios=6.2
+
+    Creates a new default settings.
+
+  .. method:: bool GetShouldPassImageTypeToResult(IdImageType type)
+    @objc@ - (void)resultShouldContainImage:(BOOL)shouldContainImage forImageType:(SDCIdImageType)imageType
+    :available: android=6.2, ios=6.2
+
+    Gets whether an :type:`IdCapture` created with these settings should extract an image (specified
+    by the given type) from recognized documents and return it as part of :type:`CapturedId`. Note
+    that the image may still not be returned, for example, if it's not present in a document or if
+    it's not recognized. Default is |false|.
+
+  .. method:: void SetShouldPassImageTypeToResult(IdImageType type, bool shouldPass)
+    @objc@ - (BOOL)resultShouldContainImageForImageType:(SDCIdImageType)imageType
+    :available: android=6.2, ios=6.2
+
+    Sets whether an :type:`IdCapture` created with these settings should extract an image (specified
+    by the given type) from recognized documents and return it as part of :type:`CapturedId`. Note
+    that the image may still not be returned, for example, if it's not present in a document or if
+    it's not recognized. Default is |false|.
+
+  .. method:: void SetProperty(string name, object value)
+    @objc@ - (void)setValue:(nullable id)value forProperty:(nonnull NSString *)property
+    @javascript@ setProperty(name: string, value: any): void
+    :available: android=6.2, ios=6.2
+
+    Sets a property to the provided value. Use this method to set properties that are not yet part of a stable API. Properties set through this method may change in a future release.
+
+  .. method:: object GetProperty(string name)
+    @objc@ - (nullable id)valueForProperty:(nonnull NSString *)property
+    @javascript@ getProperty(name: string): any
+    :available: android=6.2, ios=6.2
+
+    Retrieves the value of a previously set property. In case the property does not exist, |null| is returned. Use this method to get properties that are not yet part of a stable API. These properties may change in a future release.

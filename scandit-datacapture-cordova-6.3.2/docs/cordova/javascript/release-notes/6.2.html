@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scandit Data Capture SDK 6.2 Release Notes (March 20th 2020) &mdash; Data Capture SDK 6.3.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Scandit Data Capture SDK 6.1 Release Notes (November 6th 2019)" href="6.1.html" />
+    <link rel="prev" title="Scandit Data Capture SDK 6.3 Release Notes (May 12th 2020)" href="6.3.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Data Capture SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.3.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../run-samples.html">Run our Sample Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../add-sdk.html">Add the SDK to Your App</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Barcode Scanning</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started-barcode.html">Get Started With Barcode Scanning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure-barcodes.html">Configure Which Barcodes Are Read</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../barcode-symbologies.html">Barcode Symbologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimize-performance.html">Optimize Scanning Performance</a></li>
+</ul>
+<p class="caption"><span class="caption-text">MatrixScan + Augmented Reality</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started-matrixscan.html">Get Started With MatrixScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../add-augmented-reality-overlay.html">Add AR Overlays in MatrixScan</a></li>
+</ul>
+<p class="caption"><span class="caption-text">All Capture Modes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../camera-advanced.html">Advanced Camera Functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scan-area.html">Set up the Active Scan Area</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ui-examples.html">Choose the Scanner UI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Parser</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started-parser.html">Get Started With The Parser</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core/overview.html">ScanditCaptureCore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../barcode-capture/overview.html">ScanditBarcodeCapture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parser/overview.html">ScanditParser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">More Resources</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../release-notes.html">Release Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="6.3.html">6.3</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compatibility">Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-features">New Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#internal">Internal</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#behavioral-changes">Behavioral Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-improvements">Performance Improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug Fixes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Internal</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deprecations">Deprecations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updates">Updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bugfixes-in-sdk-6-2-2-april-15th-2020">Bugfixes in Scandit Data Capture SDK 6.2.2 (April 15th 2020)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bugfixes-in-sdk-6-2-1-march-26th-2020">Bugfixes in Scandit Data Capture SDK 6.2.1 (March 26th 2020)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="6.1.html">6.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Support &amp; FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../features-by-platform.html">Features By Platform</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://docs.scandit.com/barcode-scanner-sdk.html">SDK 5.x Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrate-to-6.html">Migrate from Barcode Scanner 5.x</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://ssl.scandit.com">Dashboard</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Data Capture SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../release-notes.html">Scandit Data Capture SDK Release Notes</a> &raquo;</li>
+        
+      <li>Scandit Data Capture SDK 6.2 Release Notes (March 20th 2020)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sdk-6-2-release-notes-march-20th-2020">
+<h1>Scandit Data Capture SDK 6.2 Release Notes (March 20th 2020)<a class="headerlink" href="#sdk-6-2-release-notes-march-20th-2020" title="Permalink to this headline">#</a></h1>
+<div class="section" id="compatibility">
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">#</a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>Minimum Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Android</p></td>
+<td><p>Android 4.4 (API level 19)</p></td>
+</tr>
+<tr class="row-odd"><td><p>iOS</p></td>
+<td><p>iOS 9.0 [1]</p></td>
+</tr>
+<tr class="row-even"><td><p>Cordova</p></td>
+<td><ul class="simple">
+<li><p><a class="reference external" href="https://www.npmjs.com/package/cordova">cordova</a> 8.0.0</p></li>
+<li><p><a class="reference external" href="https://www.npmjs.com/package/cordova-ios">cordova-ios</a> 4.5.5</p></li>
+<li><p><a class="reference external" href="https://www.npmjs.com/package/cordova-android">cordova-android</a> 7.0.0</p></li>
+<li><p>iOS 9.0 and Swift 4</p></li>
+<li><p>Android 5.0 (API level 20)</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Xamarin.iOS</p></td>
+<td><ul class="simple">
+<li><p>iOS 9.0</p></li>
+<li><p><a class="reference external" href="https://docs.microsoft.com/en-us/xamarin/ios/release-notes/13/13.10">Xamarin.iOS</a> 13.10</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Xamarin.Android</p></td>
+<td><p>Android 4.4 (API level 19)</p></td>
+</tr>
+</tbody>
+</table>
+<p>[1] <a class="reference internal" href="../barcode-capture/api/ui/barcode-tracking-advanced-overlay.html#class-scandit.datacapture.barcode.tracking.ui.BarcodeTrackingAdvancedOverlay" title="BarcodeTrackingAdvancedOverlay class">BarcodeTrackingAdvancedOverlay</a> has a minimum version of iOS 10.0</p>
+<p>See also the <a class="reference internal" href="../requirements.html"><span class="doc">System Requirements</span></a>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="new-features">
+<h2>New Features<a class="headerlink" href="#new-features" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Added MatrixScan functionality with the <a class="reference internal" href="../barcode-capture/api/barcode-tracking.html#class-scandit.datacapture.barcode.tracking.BarcodeTracking" title="BarcodeTracking class">BarcodeTracking</a> mode.</p></li>
+<li><p>Added support to configure Codabar codes with less than three data symbols.</p></li>
+<li><p>Increased the maximum supported symbol count for Code93 from 40 to 60.</p></li>
+<li><p>Added getter for plugin version <a class="reference internal" href="../core/api/data-capture-version.html#property-scandit.datacapture.core.DataCaptureVersion.PluginVersion" title="DataCaptureVersion.pluginVersion property">DataCaptureVersion.pluginVersion</a>.</p></li>
+</ul>
+<div class="section" id="internal">
+<h3>Internal<a class="headerlink" href="#internal" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>New <cite>conv_net_localization_max_input_area_size</cite> hidden property. This is a new hidden property controlling the ML localization pipeline. This property controls the max size of the input that is passed to the neural network. The larger input will be scaled down to fit this size.</p></li>
+<li><p>BlinkInput-based OCR backend now honors <cite>minimumLineHeight</cite> setting.</p></li>
+<li><p>BarcodeTrackingSession and BarcodeCaptureSession serialization: added frameSequenceId field.</p></li>
+<li><p>Highest resolution can be set in <cite>core.source.CameraSettings</cite> by setting hidden property called overwrite_with_highest_resolution to true.</p></li>
+<li><p>Added Brush deserialization.</p></li>
+<li><p>Added exposureTargetBias hidden property to <a class="reference internal" href="../core/api/camera-settings.html#class-scandit.datacapture.core.CameraSettings" title="CameraSettings class">CameraSettings</a>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="behavioral-changes">
+<h2>Behavioral Changes<a class="headerlink" href="#behavioral-changes" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Previously when disabling :type:’barcode.BarcodeCapture’ the session was not cleared. This has been changed such that every disabling of the capture mode clears the session as sessions are not meant to span over multiple enabling and disabling of a capture mode. Make sure that you are handling this correctly, especially when:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>You set the <a class="reference internal" href="../barcode-capture/api/barcode-capture-settings.html#property-scandit.datacapture.barcode.BarcodeCaptureSettings.CodeDuplicateFilter" title="duplicate filter property">duplicate filter</a> to -1. Barcodes will be scanned again after disabling and re-enabling the mode.</p></li>
+<li><p>You are for some reason disabling and re-enabling :type:’barcode.BarcodeCapture’ during the callback. Make sure this is really needed and adjust your logic if it was dependent on the session never ending.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="performance-improvements">
+<h2>Performance Improvements<a class="headerlink" href="#performance-improvements" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Significantly improved PDF417 recognition. The PDF417 reader is now better at:</p>
+<ul>
+<li><p>Handling PDF417 codes for which both the start and end delimiter patterns are heavily damaged.</p></li>
+<li><p>Dealing with erasures and codes that are slightly bent.</p></li>
+<li><p>Handling codes close to the camera’s resolution limit.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h2>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Fixed an issue that caused the barcode scanner to crash upon decoding a PDF417 code with a macro control block without optional fields.</p></li>
+<li><p>Fixed an issue where installing the plugin in a project on a Windows development machine failed</p></li>
+<li><p>Fixed an issue with changing the brush and with returning the default brush even if a listener specified a different brush for <a class="reference internal" href="../barcode-capture/api/ui/barcode-tracking-basic-overlay.html#class-scandit.datacapture.barcode.tracking.ui.BarcodeTrackingBasicOverlay" title="BarcodeTrackingBasicOverlay class">BarcodeTrackingBasicOverlay</a>.</p></li>
+<li><p>Fixed an issue where the viewfinder didn’t change its center when the scan area margins were changed.</p></li>
+<li><p>Fixed an issue on Android that would cause scanning to stop after putting the app in the background and opening again.</p></li>
+<li><p>Fixed an issue related to a deadlock that would cause the app to be unresponsive.</p></li>
+</ul>
+<div class="section" id="id1">
+<h3>Internal<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Fixed an issue that was causing a crash when trying to parse strings that can’t be encoded in UTF8.</p></li>
+<li><p>Fixed a crash happening when the device doesn’t suppoort smooth auto focus.</p></li>
+<li><p>Fixed multiple crashes when running <a class="reference internal" href="../barcode-capture/api/barcode-tracking.html#class-scandit.datacapture.barcode.tracking.BarcodeTracking" title="BarcodeTracking class">BarcodeTracking</a> mode.</p></li>
+<li><p>The avoidThreadDependencies flag of the context deserializer has been fixed. Previously it only avoided one of the two dependencies.</p></li>
+<li><p>[Android] Fixed minimum line height calculation in TextCapture doesn’t take scanning region into account.</p></li>
+<li><p>[Android] Fixed potential crash when removing a DataCaptureMode from a DataCaptureContext.</p></li>
+<li><p>[Android] Fixed an issue where <a class="reference internal" href="../barcode-capture/api/ui/barcode-tracking-advanced-overlay.html#class-scandit.datacapture.barcode.tracking.ui.BarcodeTrackingAdvancedOverlay" title="BarcodeTrackingAdvancedOverlay class">BarcodeTrackingAdvancedOverlay</a> ignored tracked barcode views visibility set by the user.</p></li>
+<li><p>Samsung Galaxy Note 10 and Samsung Xcover Pro are marked as secretly supporting fixed focus.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="deprecations">
+<h2>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this headline">#</a></h2>
+<p>No deprecations have been made up to this point.</p>
+</div>
+<div class="section" id="updates">
+<h2>Updates<a class="headerlink" href="#updates" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="bugfixes-in-sdk-6-2-2-april-15th-2020">
+<h2>Bugfixes in Scandit Data Capture SDK 6.2.2 (April 15th 2020)<a class="headerlink" href="#bugfixes-in-sdk-6-2-2-april-15th-2020" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Fixed a very rare infinite loop in the QR code reader.</p></li>
+</ul>
+</div>
+<div class="section" id="bugfixes-in-sdk-6-2-1-march-26th-2020">
+<h2>Bugfixes in Scandit Data Capture SDK 6.2.1 (March 26th 2020)<a class="headerlink" href="#bugfixes-in-sdk-6-2-1-march-26th-2020" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Fixed an issue that caused unnecessary architectures to be part of iOS exports.</p></li>
+<li><p>Fixed an issue with Swift 5.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Scandit AG
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-23556890-7', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

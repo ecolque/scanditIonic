@@ -1,0 +1,26 @@
+Captured Id Field
+=================
+
+.. module:: scandit.datacapture.id
+  :android-package: com.scandit.datacapture.id.data
+
+.. class:: CapturedIdField
+  @objc@ SDCCapturedIdField : NSObject
+  :available: android=6.2, ios=6.2
+
+  .. property:: string Name { get; }
+   :available: android=6.2, ios=6.2
+
+   The name of the field.
+
+  .. property:: object Parsed { get; }
+   @objc@ @property (nonatomic, nullable, readonly) NSObject *parsed
+   :available: android=6.2, ios=6.2
+
+   The parsed data contained in this field.
+
+  .. property:: string? JsonData { get; }
+    @objc@ @property (nonatomic, nonnull, readonly) NSString *rawString
+    :available: android=6.2, ios=6.2
+
+    The raw string that represents this field in the input string/data.

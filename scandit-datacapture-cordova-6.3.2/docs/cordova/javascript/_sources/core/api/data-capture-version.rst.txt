@@ -1,0 +1,23 @@
+.. eager-ifconfig:: platform != 'cordova' or platform != 'ios' or platform != 'xamarin.android' or platform != 'xamarin.ios'
+
+    :orphan:
+
+Data Capture Version
+====================
+
+.. module:: scandit.datacapture.core
+
+.. class:: DataCaptureVersion
+  @objc@ SDCDataCaptureVersion : NSObject
+  :available: cordova=6.2, ios=6.2, xamarin=6.3
+
+  This class contains the DataCapture version getter.
+
+  .. property:: static string PluginVersion { get; }
+    :available: cordova=6.2
+
+  .. property:: static string Version { get; }
+    @objc@ @property (class, nonatomic, nonnull, readonly) NSString *version
+    :available: ios=6.2, xamarin=6.3
+    
+    Returns the version of the |sdk|

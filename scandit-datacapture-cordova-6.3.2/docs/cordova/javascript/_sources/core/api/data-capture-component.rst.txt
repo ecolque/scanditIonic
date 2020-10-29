@@ -1,0 +1,18 @@
+Data Capture Component
+======================
+
+.. module:: scandit.datacapture.core
+  :android-package: com.scandit.datacapture.core.component
+
+.. interface:: IDataCaptureComponent
+  @objc@ SDCDataCaptureComponent <NSObject>
+  :available: android=6.3, ios=6.3, cordova=6.3
+
+  :type:`IDataCaptureComponent` is the |interface| implemented by all data capture components such as the :type:`parser <parser.Parser>`.
+
+  .. property:: string Id { get; }
+    @objc@ @property (nonatomic, readonly) NSString *componentId;
+    :available: android=6.3, ios=6.3, cordova=6.3
+
+    An ID for the component, currently only assignable during deserialization.
+

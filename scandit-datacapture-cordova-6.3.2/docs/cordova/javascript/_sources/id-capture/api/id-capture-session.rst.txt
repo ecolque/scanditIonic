@@ -1,0 +1,30 @@
+Id Capture Session
+=====================
+
+.. module:: scandit.datacapture.id
+  :android-package: com.scandit.datacapture.id.capture
+
+.. class:: IdCaptureSession
+  @objc@ SDCIdCaptureSession : NSObject
+  :available: android=6.2, ios=6.2
+
+  The id capture session is responsible for keeping CapturedId data.
+
+  The id capture session should only be accessed from within the callbacks to which it is provided
+  as an argument. It is not safe to access it from anywhere else since it may be concurrently
+  modified. However, the captured id returned by the session can be used outside the callbacks.
+
+  .. property:: CapturedId NewlyCapturedId { get; }
+    :available: android=6.2, ios=6.2
+
+    Parsed data from a document recognized in the last frame.
+
+  .. property:: long FrameSequenceId { get; }
+    @objc@ @property (nonatomic, readonly) NSInteger frameSequenceId
+    :available: android=6.2, ios=6.2
+
+    The identifier of the current frame sequence.
+
+    .. important::
+     As long as there is no interruptions of frames coming from the camera, the
+     :prop:`IdCaptureSession.FrameSequenceId` will stay the same.

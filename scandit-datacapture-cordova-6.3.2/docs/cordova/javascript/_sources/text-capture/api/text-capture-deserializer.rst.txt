@@ -1,0 +1,92 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  :orphan:
+
+Text Capture Deserializer
+============================
+
+.. module:: scandit.datacapture.text
+  :android-package: com.scandit.datacapture.text.capture.serialization
+
+.. warning::
+
+  The deserialization API is not yet stable and will still change over the coming releases.
+
+.. note::
+
+  This deserializer is not thread-safe, subsequent calls for the same settings, mode or overlay have to be called on the same thread.
+
+.. class:: TextCaptureDeserializer : core.IDataCaptureModeDeserializer
+  @objc@ SDCTextCaptureDeserializer: NSObject <SDCDataCaptureModeDeserializer>
+  :available: android=6.3, ios=6.3
+
+  A deserializer to construct text capture from JSON. For most use cases it is enough to use :meth:`text.TextCapture.FromJson` which internally uses this deserializer. Using the deserializer gives the advantage of being able to listen to the deserialization events as they happen and potentially influence them. Additonally warnings can be read from the deserializer that would otherwise not be available.
+
+  **Related topics**: :doc:`/core/serialization`.
+
+  .. method:: TextCaptureDeserializer()
+    @objc@ + (instancetype)textCaptureDeserializer
+    :available: android=6.3, ios=6.3
+
+    Creates a new deserializer object.
+
+  .. property:: ITextCaptureDeserializerListener Listener { get; set; }
+    @objc@ @property (nonatomic, weak, nullable) id<SDCTextCaptureDeserializerDelegate> delegate
+    :available: android=6.3, ios=6.3
+
+    The object informed about deserialization events.
+
+  .. property:: IList<String> Warnings { get; }
+    @objc@ @property (nonatomic, readonly) NSArray<NSString *> *warnings
+    :available: android=6.3, ios=6.3
+
+    The warnings produced during deserialization, for example which properties were not used during deserialization.
+
+  .. method:: TextCapture ModeFromJson(core.DataCaptureContext context, String jsonData)
+    @java@ text.capture.TextCapture ModeFromJson(core.capture.DataCaptureContext dataCaptureContext, String jsonData)
+    @objc@ - (nullable SDCTextCapture *)modeFromJSONString:(NSString *)JSONString withContext:(SDCDataCaptureContext *)context error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Deserializes text capture from JSON. 
+
+    .. include:: /core/deserialization-exception.txt
+
+  .. method:: TextCapture UpdateModeFromJson(TextCapture mode, String jsonData)
+    @objc@ - (nullable SDCTextCapture *)updateMode:(SDCTextCapture *)textCapture fromJSONString:(NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Takes an existing text capture and updates it by deserializing new or changed properties from JSON. See :ref:`serialization_update_from_json` for details of how updates are being done.
+
+    .. include:: /core/deserialization-exception.txt
+
+  .. method:: TextCaptureSettings SettingsFromJson(String jsonData)
+    @objc@ - (nullable SDCTextCaptureSettings *)settingsFromJSONString:(NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Deserializes text capture settings from JSON. 
+    
+    .. include:: /core/deserialization-exception.txt
+
+  .. method:: TextCaptureSettings UpdateSettingsFromJson(TextCaptureSettings settings, String jsonData)
+    @objc@ - (nullable SDCTextCaptureSettings *)updateSettings:(SDCTextCaptureSettings *)settings fromJSONString:(NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Takes existing text capture settings and updates them by deserializing new or changed properties from JSON. See :ref:`serialization_update_from_json` for details of how updates are being done.
+
+    .. include:: /core/deserialization-exception.txt
+
+  .. method:: ui.TextCaptureOverlay OverlayFromJson(TextCapture mode, String jsonData)
+    @objc@ - (nullable SDCTextCaptureOverlay *)overlayFromJSONString:(NSString *)JSONString withMode:(SDCTextCapture *)mode error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Deserializes a text capture overlay from JSON. 
+    
+    .. include:: /core/deserialization-exception.txt
+
+  .. method:: ui.TextCaptureOverlay UpdateOverlayFromJson(ui.TextCaptureOverlay overlay, String jsonData)
+    @objc@ - (nullable SDCTextCaptureOverlay *)updateOverlay:(SDCTextCaptureOverlay *)overlay fromJSONString:(NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Takes an existing text capture overlay and updates it by deserializing new or changed properties from JSON. See :ref:`serialization_update_from_json` for details of how updates are being done.
+
+    .. include:: /core/deserialization-exception.txt

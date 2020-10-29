@@ -1,0 +1,41 @@
+Location Selection Deserializer
+===============================
+
+.. module:: scandit.datacapture.core
+  :android-package: com.scandit.datacapture.core.area.serialization
+
+.. warning::
+
+  The deserialization API is not yet stable and will still change over the coming releases.
+
+.. note::
+
+  This deserializer is not thread-safe, subsequent calls for the same location selection have to be called on the same thread.
+
+.. class:: LocationSelectionDeserializer
+  @objc@ SDCLocationSelectionDeserializer : NSObject
+  :available: android=6.3, ios=6.3
+
+  A deserializer to construct location selections from JSON.
+
+  **Related topics**: :doc:`/core/serialization`.
+
+  .. method:: LocationSelectionDeserializer()
+    @objc@ + (nonnull instancetype)locationSelectionDeserializer
+    :available: android=6.3, ios=6.3
+
+    Creates a new deserializer object.
+
+  .. property:: IList<String> Warnings { get; }
+    @objc@ @property (nonatomic, readonly) NSArray<NSString *> *warnings
+    :available: android=6.3, ios=6.3
+
+    The warnings produced during deserialization, for example which properties were not used during deserialization.
+
+  .. method:: ILocationSelection LocationSelectionFromJson(String jsonData)
+    @objc@  - (nullable id<SDCLocationSelection>)locationSelectionFromJSONString:(nonnull NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Deserializes a location selection from JSON. 
+    
+    .. include:: /core/deserialization-exception.txt

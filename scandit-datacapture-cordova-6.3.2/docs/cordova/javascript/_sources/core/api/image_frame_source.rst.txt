@@ -1,0 +1,87 @@
+.. eager-ifconfig:: platform == 'android'
+
+  BitmapFrameSource
+  =================
+  
+.. eager-ifconfig:: platform != 'android'
+
+  ImageFrameSource
+  =================
+
+.. module:: scandit.datacapture.core
+  :android-package: com.scandit.datacapture.core.source
+
+.. class:: ImageFrameSource : IFrameSource
+  @java@ BitmapFrameSource : FrameSource
+  :available: android=6.3, ios=6.3
+  
+  Emits a frame from the provided :type:`android.graphics.Bitmap`.
+
+  To emit the frame set this object  as the :meth:`frame source <DataCaptureContext.SetFrameSourceAsync>` for the :type:`DataCaptureContext` and turn it on by changing the :meth:`desired state<IFrameSource.SwitchToDesiredStateAsync>` to :enum:`FrameSourceState.On`. This frame source will turn off automatically after the frame is emitted.
+  
+  .. eager-ifconfig:: platform == 'ios'
+  
+    .. note:: When using :type:`ImageFrameSource` with :type:`text.TextCapture` you should change the :prop:`text.TextCaptureSettings.RecognitionDirection` to :enum:`Direction.LeftToRight`.
+
+
+  .. method:: static ImageFrameSource Of(android.graphics.Bitmap bitmap)
+    @objc@ + (nonnull instancetype)frameSourceWithImage:(nonnull UIImage *)image
+    :available: android=6.3, ios=6.3
+
+    .. eager-ifconfig:: platform == 'android'
+    
+      Constructs a new :type:`ImageFrameSource` from the provided Bitmap. This Bitmap is required to have config ARGB_8888.
+
+    .. eager-ifconfig:: platform == 'ios'
+    
+      Constructs a new :type:`ImageFrameSource` from the provided :type:`android,graphics.Bitmap`. 
+    
+      The provided :type:`android,graphics.Bitmap` should have one of the following configuration:
+      
+      +-----------------------------------------------------------------------------------------------------+
+      | Gray color space:                                                                                   |
+      +=================================+=================================+=================================+
+      | 8  bits per pixel               | 8  bits per component           | kCGImageAlphaNone               |
+      +---------------------------------+---------------------------------+---------------------------------+
+      
+      +-----------------------------------------------------------------------------------------------------+
+      | RGB color space:                                                                                    |
+      +=================================+=================================+=================================+
+      | 32  bits per pixel              | 8  bits per component           | kCGImageAlphaNoneSkipFirst      |
+      +---------------------------------+---------------------------------+---------------------------------+
+      | 32  bits per pixel              | 8  bits per component           | kCGImageAlphaNoneSkipLast       |
+      +---------------------------------+---------------------------------+---------------------------------+
+      | 32  bits per pixel              | 8  bits per component           | kCGImageAlphaPremultipliedFirst |
+      +---------------------------------+---------------------------------+---------------------------------+
+      | 32  bits per pixel              | 8  bits per component           | kCGImageAlphaPremultipliedLast  |
+      +---------------------------------+---------------------------------+---------------------------------+
+      
+  .. property:: FrameSourceState DesiredState { get; }
+    :available: android=6.3
+
+    Implemented from :type:`IFrameSource`. See :prop:`IFrameSource.DesiredState`.
+
+  .. property:: FrameSourceState CurrentState { get; }
+    :available: android=6.3
+
+    Implemented from :type:`IFrameSource`. See :prop:`IFrameSource.CurrentState`.
+
+  .. method:: void AddListener(IFrameSourceListener? listener)
+    :available: android=6.3
+
+    Implemented from :type:`IFrameSource`. See :meth:`IFrameSource.AddListener`.
+
+  .. method:: void RemoveListener(IFrameSourceListener? listener)
+    :available: android=6.3
+
+    Implemented from :type:`IFrameSource`. See :meth:`IFrameSource.RemoveListener`.
+
+  .. method:: Task<bool> SwitchToDesiredStateAsync(FrameSourceState state)
+    :available: android=6.3
+
+    Implemented from :type:`IFrameSource`. See :meth:`IFrameSource.SwitchToDesiredStateAsync`.
+    
+  .. method:: void SwitchToDesiredState(FrameSourceState state)
+    :available: ios=6.3
+
+    Convenience method for :meth:`IFrameSource.SwitchToDesiredStateAsync`: it is same as calling :meth:`IFrameSource.SwitchToDesiredStateAsync` with the second argument set to |null|.

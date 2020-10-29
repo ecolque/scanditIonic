@@ -1,0 +1,59 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  :orphan:
+
+Parser Deserializer
+===================
+
+.. module:: scandit.datacapture.parser
+  :android-package: com.scandit.datacapture.parser.serialization
+
+.. warning::
+
+  The deserialization API is not yet stable and will still change over the coming releases.
+
+.. note::
+
+  This deserializer is not thread-safe, subsequent calls for the same parser have to be called on the same thread.
+
+.. class:: ParserDeserializer : core.IDataCaptureComponentDeserializer
+  :available: android=6.3, ios=6.3
+
+  A deserializer to construct a parser from JSON. For most use cases it is enough to use :meth:`parser.Parser.FromJson` which internally uses this deserializer. Using the deserializer gives the advantage of being able to listen to the deserialization events as they happen and potentially influence them. Additonally warnings can be read from the deserializer that would otherwise not be available.
+
+  **Related topics**: :doc:`/core/serialization`.
+
+  .. method:: ParserDeserializer()
+    @objc@ + (instancetype)parserDeserializer
+    :available: android=6.3, ios=6.3
+
+    Creates a new deserializer object.
+
+  .. property:: IParserDeserializerListener Listener { get; set; }
+    @objc@ @property (nonatomic, weak, nullable) id<SDCParserDeserializerDelegate> delegate
+    :available: android=6.3, ios=6.3
+
+    The object informed about deserialization events.
+
+  .. property:: IList<String> Warnings { get; }
+    @objc@ @property (nonatomic, nonnull, readonly) NSArray<NSString *> *warnings
+    :available: android=6.3, ios=6.3
+
+    The warnings produced during deserialization, for example which properties were not used during deserialization.
+
+  .. method:: Parser ParserFromJson(core.DataCaptureContext context, String jsonData)
+    @java@ parser.Parser ParserFromJson(core.capture.DataCaptureContext dataCaptureContext, String jsonData)
+    @objc@ - (nullable SDCParser *)parserFromJSONString:(nonnull NSString *)JSONString context:(nonnull SDCDataCaptureContext *)context error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Deserializes a parser from JSON. 
+
+    .. include:: /core/deserialization-exception.txt
+
+  .. method:: Parser UpdateParserFromJson(Parser parser, String jsonData)
+    @objc@ - (nullable SDCParser *)updateParser:(nonnull SDCParser *)parser fromJSONString:(NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Takes an existing parser and updates it by deserializing new or changed properties from JSON. See :ref:`serialization_update_from_json` for details of how updates are being done.
+
+    .. include:: /core/deserialization-exception.txt

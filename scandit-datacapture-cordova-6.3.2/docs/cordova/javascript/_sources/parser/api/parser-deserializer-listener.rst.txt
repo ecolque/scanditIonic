@@ -1,0 +1,31 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  :orphan:
+
+Parser Deserializer Listener
+============================
+
+.. module:: scandit.datacapture.parser
+  :android-package: com.scandit.datacapture.parser.serialization
+
+.. warning::
+
+  The deserialization API is not yet stable and will still change over the coming releases.
+
+.. interface:: IParserDeserializerListener
+  @objc@ SDCParserDeserializerDelegate <NSObject>
+  :available: android=6.3, ios=6.1
+
+  The listener for the parser deserializer.
+
+  .. method:: void OnParserDeserializationStarted(ParserDeserializer deserializer, Parser parser, core.JsonValue json)
+    @objc@ - (void)parserDeserializer:(SDCParserDeserializer *)parserDeserializer didStartDeserializingParser:(SDCParser *)parser fromJSONValue:(SDCJSONValue *)JSONValue
+    :available: android=6.3, ios=6.3
+
+    Called before the deserialization of the parser started. This is the point to overwrite defaults before the deserialization is performed. 
+
+  .. method:: void OnParserDeserializationFinished(ParserDeserializer deserializer, Parser parser, core.JsonValue json)
+    @objc@ - (void)parserDeserializer:(SDCParserDeserializer *)parserDeserializer didFinishDeserializingParser:(SDCParser *)parser fromJSONValue:(SDCJSONValue *)JSONValue
+    :available: android=6.3, ios=6.3
+
+    Called when the deserialization of the parser finished. This is the point to do additional deserialization.

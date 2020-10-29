@@ -1,0 +1,55 @@
+.. eager-ifconfig:: platform == 'cordova' or platform == 'xamarin.android' or platform == 'xamarin.ios'
+
+  :orphan:
+
+Text Capture Deserializer Listener
+=====================================
+
+.. module:: scandit.datacapture.text
+  :android-package: com.scandit.datacapture.text.capture.serialization
+
+.. warning::
+
+  The deserialization API is not yet stable and will still change over the coming releases.
+
+.. interface:: ITextCaptureDeserializerListener
+  @objc@ SDCTextCaptureDeserializerDelegate <NSObject>
+  :available: android=6.3, ios=6.3
+
+  The listener for the text capture deserializer.
+
+  .. method:: void OnModeDeserializationStarted(TextCaptureDeserializer deserializer, TextCapture mode, core.JsonValue json)
+    @objc@ - (void)textCaptureDeserializer:(SDCTextCaptureDeserializer *)deserializer didStartDeserializingMode:(SDCTextCapture *)mode fromJSONValue:(SDCJSONValue *)JSONValue
+    :available: android=6.3, ios=6.3
+
+    Called before the deserialization of text capture started. This is the point to overwrite defaults before the deserialization is performed. 
+
+  .. method:: void OnModeDeserializationFinished(TextCaptureDeserializer deserializer, TextCapture mode, core.JsonValue json)
+    @objc@ - (void)textCaptureDeserializer:(SDCTextCaptureDeserializer *)deserializer didFinishDeserializingMode:(SDCTextCapture *)mode fromJSONValue:(SDCJSONValue *)JSONValue
+    :available: android=6.3, ios=6.3
+
+    Called when the deserialization of text capture finished. This is the point to do additional deserialization.
+
+  .. method:: void OnSettingsDeserializationStarted(TextCaptureDeserializer deserializer, TextCaptureSettings settings, core.JsonValue json)
+    @objc@ - (void)textCaptureDeserializer:(SDCTextCaptureDeserializer *)deserializer didStartDeserializingSettings:(SDCTextCaptureSettings *)settings fromJSONValue:(SDCJSONValue *)JSONValue
+    :available: android=6.3, ios=6.3
+
+    Called before the deserialization of the text capture settings started. This is the point to overwrite defaults before the deserialization is performed. 
+
+  .. method:: void OnSettingsDeserializationFinished(TextCaptureDeserializer deserializer, TextCaptureSettings settings, core.JsonValue json)
+    @objc@ - (void)textCaptureDeserializer:(SDCTextCaptureDeserializer *)deserializer didFinishDeserializingSettings:(SDCTextCaptureSettings *)settings fromJSONValue:(SDCJSONValue *)JSONValue
+    :available: android=6.3, ios=6.3
+
+    Called when the deserialization of the text capture settings finished. This is the point to do additional deserialization.
+
+  .. method:: void OnOverlayDeserializationStarted(TextCaptureDeserializer deserializer, ui.TextCaptureOverlay overlay, core.JsonValue json)
+    @objc@ - (void)textCaptureDeserializer:(SDCTextCaptureDeserializer *)deserializer didStartDeserializingOverlay:(SDCTextCaptureOverlay *)overlay fromJSONValue:(SDCJSONValue *)JSONValue
+    :available: android=6.3, ios=6.3
+
+    Called before the deserialization of the text capture overlay started. This is the point to overwrite defaults before the deserialization is performed. 
+
+  .. method:: void OnOverlayDeserializationFinished(TextCaptureDeserializer deserializer, ui.TextCaptureOverlay overlay, core.JsonValue json)
+    @objc@ - (void)textCaptureDeserializer:(SDCTextCaptureDeserializer *)deserializer didFinishDeserializingOverlay:(SDCTextCaptureOverlay *)overlay fromJSONValue:(SDCJSONValue *)JSONValue
+    :available: android=6.3, ios=6.3
+
+    Called when the deserialization of the text capture overlay finished. This is the point to do additional deserialization.

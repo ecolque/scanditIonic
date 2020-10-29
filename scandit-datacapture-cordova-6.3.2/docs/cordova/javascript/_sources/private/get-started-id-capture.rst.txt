@@ -1,0 +1,173 @@
+Get Started With Scandit ID Capture
+===================================
+
+.. module:: scandit.datacapture.id-capture
+  :hidden:
+
+In this guide you will learn step by step how to add id capture to your application. Roughly, the steps are:
+
+* Create a xxx
+
+.. include:: /core/prerequisites.txt
+//TODO: Here something shoulde be mentioned about BlinkID lincense key
+
+.. include:: /core/create-context.txt
+
+
+In this guide you will learn what is and how to use Scandit ID Capture. 
+
+//Explain what we can do 
+The Scandit ID Capture supports scanning and parsing front page of various ID card and driver's license formats.
+The result of the Scandit ID Capture is a json output with data extracted from the document and (optionally) images captured from it.
+
+//Explain how scanning and parser interacts
+//???
+
+In order to scan back page of the document you need to add barcode-capture.
+Scanning MRTD codes alone is not supported currently
+
+.. sample:: java
+
+  DataCaptureContext dataCaptureContext = DataCaptureContext.forLicenseKey(SCANDIT_LICENSE_KEY);
+  IdCapture idCapture = IdCapture.forDataCaptureContext(dataCaptureContext, new IdCaptureSettings());
+  Camera camera = Camera.getDefaultCamera(IdCapture.createRecommendedCameraSettings());
+  if (camera != null) {
+    dataCaptureContext.setFrameSource(camera);
+  }
+
+  @Override
+  public void onIdCaptured(
+          @NotNull IdCapture mode,
+          @NotNull final IdCaptureSession session,
+          @NotNull FrameData data
+  ) {
+      CapturedId captureId = session.getNewlyCapturedId();
+      String json = capturedId.getJsonString();
+      // Process the result.
+  }
+
+.. sample:: swift
+
+  //todo
+  barcodeTracking = BarcodeTracking(context: context, settings: settings)
+
+
+Supported identity documents
+----------------------------
+
+.. csv-table::
+    :header-rows: 1
+    :widths: 55, 55
+    :file: id-capture/supported-countries.csv
+
+USA Supported identity documents
+--------------------------------
+
+.. csv-table::
+    :header-rows: 1
+    :widths: 55, 55
+    :file: id-capture/supported-states.csv
+
+ID document example
+-------------------
+
+Scanning the following document using Scandit ID Capture:
+
+//TODO: put example of front page of ID card.
+
+will result in the following JSON output:
+
+//TODO: put json here.
+
+US driver's license example
+---------------------------
+
+Scanning the following document using Scandit ID Capture:
+
+.. image:: /_static/id-capture/wisconsin-driver-license.jpg
+  :align: center
+
+will result in the following JSON output:
+
+.. code-block:: javascript
+
+    {
+        "fullName": "",
+        "religion": "",
+        "residentialStatus": "",
+        "placeOfBirth": "",
+        "driverLicenseDetailedInfo": {
+       	    "vehicleClass": "D",
+            "restrictions": "",
+            "endorsements": "NONE"
+    	},
+        "employer": "",
+        "dateOfBirth": {
+        	"day": 11,
+        	"month": 2,
+        	"year": 1974
+        },
+        "sex": "M",
+        "maritalStatus": "",
+        "personalIdNumber": "",
+        "additionalNameInformation": "",
+        "race": "",
+        "nationality": "",
+        "dateOfExpiry": {
+            "day": 11,
+            "month": 2,
+            "year": 2023
+        },
+        "mrzResult": {
+            "documentType": 0,
+            "sanitizedOpt2": "",
+            "sanitizedIssuer": "",
+            "applicationReceiptNumber": "",
+            "isParsed": false,
+            "dateOfBirth": {
+                "day": 0,
+                "month": 0,
+                "year": 0
+            },
+            "sanitizedOpt1": "",
+            "opt1": "",
+            "isVerified": false,
+            "nationality": "",
+            "dateOfExpiry": {
+                "day": 0,
+                "month": 0,
+                "year": 0
+            },
+            "issuer": "",
+            "immigrantCaseNumber": "",
+            "gender": "",
+            "opt2": "",
+            "secondaryID": "",
+            "mrzText": "",
+            "primaryID": "",
+            "sanitizedNationality": "",
+            "documentCode": "",
+            "alienNumber": "",
+            "documentNumber": ""
+        },
+        "documentAdditionalNumber": "",
+        "conditions": "",
+        "profession": "",
+        "additionalAddressInformation": "",
+        "firstName": "DEREK THOMAS",
+        "dateOfIssue": {
+            "day": 31,
+            "month": 10,
+            "year": 2015
+        },
+        "issuingAuthority": "",
+        "lastName": "SAMPLE",
+        "address": "4802 SHEBOYGAN AVE\\nMADISON, WI 53705",
+        "documentNumber": "S123-4567-6501-00"
+    }
+
+.. admonition:: What's next?
+
+  To dive further into the Scandit Id Capture we recommend the following articles:
+  TODO
+  

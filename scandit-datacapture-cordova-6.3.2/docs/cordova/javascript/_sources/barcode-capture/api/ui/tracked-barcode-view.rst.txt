@@ -1,0 +1,49 @@
+.. eager-ifconfig:: platform != 'cordova'
+
+  :orphan:
+
+Tracked Barcode View
+=================================
+
+.. module:: scandit.datacapture.barcode.tracking.ui
+
+.. interface:: TrackedBarcodeViewOptions
+  :available: cordova=6.3
+
+  Provides a way to set different options for how the :type:`TrackedBarcodeView` will be shown.
+
+  .. property:: core.Size Size { get; set; }
+    @javascript@ size?: core.Size
+    :available: cordova=6.3
+
+    The expected size of the view.
+
+    Set either this or :prop:`Scale` to set a specific size for the :type:`TrackedBarcodeView`.
+
+  .. property:: float Scale { get; set; }
+    @javascript@ scale?: number
+    :available: cordova=6.3
+
+    The scaling factor to use to size the view. The value should be a positive number.
+
+    Set either this or :prop:`Size` to set a specific size for the :type:`TrackedBarcodeView`.
+
+.. class:: TrackedBarcodeView
+  :available: cordova=6.3
+
+  A view that can be shown for a :type:`TrackedBarcode` through a :type:`BarcodeTrackingAdvancedOverlay`.
+
+  .. method:: static Task<TrackedBarcodeView> WithHTMLElement(HTMLElement element, TrackedBarcodeViewOptions? options)
+    :available: cordova=6.3
+
+    Create a view based on an HTML element.
+
+    Certain elements, e.g. embedded images cannot be rendered this way. Suitable for simple HTML elements that e.g. consist of colors, shapes and text.
+    For more advanced views, use :meth:`WithBase64EncodedData`.
+
+    As acquiring the view this way causes quality loss, we suggest to pass a view that's double the size of what's expected and scale it down using :prop:`TrackedBarcodeViewOptions.Scale`.
+
+  .. method:: static Task<TrackedBarcodeView> WithBase64EncodedData(string data, TrackedBarcodeViewOptions? options)
+    :available: cordova=6.3
+
+    Create a view based on base64 encoded data. The image data should be `image/png`.

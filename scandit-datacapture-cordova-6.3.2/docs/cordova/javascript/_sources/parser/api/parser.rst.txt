@@ -1,0 +1,100 @@
+.. eager-ifconfig:: platform == 'xamarin.ios' or platform == 'xamarin.android'
+
+  :orphan:
+
+Parser
+======
+
+.. module:: scandit.datacapture.parser
+
+
+.. class:: Parser : core.IDataCaptureComponent
+  @objc@ SDCParser : NSObject <SDCDataCaptureComponent>
+  :available: ios=6.1, android=6.1, cordova=6.3
+
+  .. method:: static Parser ForFormat(core.DataCaptureContext dataCaptureContext, ParserDataFormat dataFormat)
+    @objc@ + (nullable instancetype)parserForContext:(nonnull SDCDataCaptureContext *)context format:(SDCParserDataFormat)dataFormat error:(NSError **)error
+    @javascript@ static forContextAndFormat(context: core.DataCaptureContext, dataFormat: ParserDataFormat): Parser
+    :available: android=6.1, ios=6.1, cordova=6.3
+
+    Create new parser for the provided data format and context. The license key with which the data capture context was constructed must have the parser feature enabled. 
+
+    .. eager-ifconfig:: platform == 'ios'
+
+      In case the parser could not be created, more detailed information on why creation failed is stored in the error argument, if non-|null|.
+
+  .. eager-ifconfig:: platform != 'ios'
+
+     In case the parser could not be constructed, an exception is raised. Information on why creation failed is contained in the exception error message.
+
+     .. todo:: specify exception type
+
+  .. method:: static Parser FromJson(core.DataCaptureContext dataCaptureContext, String jsonData)
+    @objc@ + (nullable instancetype)parserFromJSONString:(nonnull NSString *)JSONString context:(nonnull SDCDataCaptureContext *)context error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Construct a new parser with the provided JSON serialization. See :doc:`/core/serialization` for details.
+
+  .. method:: ParsedData ParseString(String string)
+    @objc@ - (nullable SDCParsedData *)parseString:(NSString *)string error:(NSError **)error
+    @javascript@ parseString(data: string): Promise<ParsedData>
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+    Parses the data string and returns the contained field in the result object. Typical inputs to this method is the data contained in a barcode (see :prop:`barcode.Barcode.Data`)
+
+    .. eager-ifconfig:: platform == 'ios'
+
+      In case the data string could not be parsed, the error message is contained in the **error** parameter.
+
+    .. eager-ifconfig:: platform != 'ios'
+
+      In case the data string could not be parsed, an exception is raised. More detailed information on why creation failed is contained in the exception error message.
+
+     .. todo:: specify exception type
+
+  .. method:: ParsedData ParseRawData(Data data)
+    @java@ ParsedData parseRawData(byte[] data)
+    @javascript@ parseRawData(data: string): Promise<ParsedData>
+    @objc@ - (nullable SDCParsedData *)parseRawData:(NSData *)data error:(NSError **)error
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+    Parses the raw data and returns the contained field in the result object. Typical inputs to this method is the raw data of a barcode (see :prop:`barcode.Barcode.RawData`).
+
+    .. eager-ifconfig:: platform == 'ios'
+
+      In case the data string could not be parsed, the error message is contained in the **error** parameter.
+
+    .. eager-ifconfig:: platform != 'ios'
+
+      In case the data string could not be parsed, an exception is raised. More detailed information on why creation failed is contained in the exception error message.
+
+     .. todo:: specify exception type
+
+
+  .. method:: void SetOptions(IDictionary<string, Object> options)
+    @objc@ -(BOOL)setOptions:(NSDictionary<NSString*, NSObject*> *)options error:(NSError **)error
+    @javascript@ setOptions(options: IDictionary<string, any>): Promise<void>
+    :available: ios=6.1, android=6.1, cordova=6.3
+
+    Set the provided options on the parser.
+
+    Available options depend on the data format type of the parser and are documented for each of the supported data formats.
+
+    .. eager-ifconfig:: platform == 'ios'
+
+      In case the options are invalid, this method returns |false| and the error argument is filled with more information on the failure.
+
+    .. eager-ifconfig:: platform != 'ios'
+
+      In case the options are invalid, an exception is raised. More detailed information on why creation failed is contained in the exception error message.
+
+  .. property:: string Id { get; }
+    :available: android=6.3, cordova=6.3
+
+    Implemented from :type:`core.IDataCaptureComponent`. See :prop:`core.IDataCaptureComponent.Id`.
+
+  .. method:: void UpdateFromJson(String jsonData)
+    @objc@ - (BOOL)updateFromJSONString:(nonnull NSString *)JSONString error:(NSError **)error
+    :available: android=6.3, ios=6.3
+
+    Updates the parser according to a JSON serialization. See :doc:`/core/serialization` for details.

@@ -1,0 +1,30 @@
+Combined Viewfinder
+===================
+
+.. module:: scandit.datacapture.core.ui
+  :android-package: com.scandit.datacapture.core.ui.viewfinder
+
+.. class:: CombinedViewfinder : IViewfinder
+  :available: android=6.3, ios=6.3, xamarin=6.3
+
+  A viewfinder that is a container for other viewfinders. It allows you to have multiple viewfinders in one overlay.
+
+  To use this viewfinder, create a new instance of it and assign it to the overlay, e.g. assign it to the :type:`barcode capture overlay<barcode.ui.BarcodeCaptureOverlay>` with the :prop:`barcode.ui.BarcodeCaptureOverlay.Viewfinder` property.
+
+  .. method:: CombinedViewfinder()
+    @objc@ +(nonnull instancetype)viewfinder
+    :available: android=6.3, ios=6.3, xamarin=6.3
+
+    Returns a new combined viewfinder.
+
+  .. method:: void AddViewfinder(core.ui.IViewfinder viewfinder)
+    @objc@ -(void)addViewfinder:(nonnull id<SDCViewfinder>)viewfinder
+    :available: android=6.3, ios=6.3, xamarin=6.3
+
+    Adds viewfinder.
+
+  .. method:: void Clear()
+    @objc@ -(void)clear
+    :available: android=6.3, ios=6.3, xamarin=6.3
+
+    Removes all contained viewfinders.

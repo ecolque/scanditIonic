@@ -1,0 +1,33 @@
+|sdk| System Requirements
+=========================
+
+.. module:: scandit.datacapture.core
+  :hidden:
+
+.. list-table::
+  :header-rows: 1
+  :widths: 5 10 10
+
+  * - 
+    - Android
+    - iOS
+
+  * - **Min OS Version**
+    - Android 4.4 (API level 19)
+    - iOS 9.0 [1]
+
+  * - **Recommended Camera Resolution**
+    - 720p
+    - 720p
+
+  * - **Architectures**
+    - ARMv7, ARM64, x86, x86_64
+    - ARMv7, ARM64, i386 (simulator), x86_64 (simulator)
+
+  * - **GPU**
+    - required [2]
+    - required
+
+[1] :type:`barcode.tracking.ui.BarcodeTrackingAdvancedOverlay` has a minimum version of iOS 10.0
+
+[2] On Android hardware acceleration has to be enabled for the camera preview to work. Hardware acceleration is enabled by default since API level 14 but can potentially be turned off in the Manifest, do not do this if you use the camera.

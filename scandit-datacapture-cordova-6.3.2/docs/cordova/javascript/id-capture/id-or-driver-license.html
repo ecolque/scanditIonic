@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Id cards and Driver license &mdash; Data Capture SDK 6.3.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Data Capture SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.3.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../run-samples.html">Run our Sample Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../add-sdk.html">Add the SDK to Your App</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Barcode Scanning</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started-barcode.html">Get Started With Barcode Scanning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure-barcodes.html">Configure Which Barcodes Are Read</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../barcode-symbologies.html">Barcode Symbologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimize-performance.html">Optimize Scanning Performance</a></li>
+</ul>
+<p class="caption"><span class="caption-text">MatrixScan + Augmented Reality</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started-matrixscan.html">Get Started With MatrixScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../add-augmented-reality-overlay.html">Add AR Overlays in MatrixScan</a></li>
+</ul>
+<p class="caption"><span class="caption-text">All Capture Modes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../camera-advanced.html">Advanced Camera Functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scan-area.html">Set up the Active Scan Area</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ui-examples.html">Choose the Scanner UI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Parser</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started-parser.html">Get Started With The Parser</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core/overview.html">ScanditCaptureCore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../barcode-capture/overview.html">ScanditBarcodeCapture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parser/overview.html">ScanditParser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">More Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Support &amp; FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../features-by-platform.html">Features By Platform</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://docs.scandit.com/barcode-scanner-sdk.html">SDK 5.x Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrate-to-6.html">Migrate from Barcode Scanner 5.x</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://ssl.scandit.com">Dashboard</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Data Capture SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Id cards and Driver license</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id-cards-and-driver-license">
+<h1>Id cards and Driver license<a class="headerlink" href="#id-cards-and-driver-license" title="Permalink to this headline">#</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
+<p>The Scandit Id Capture supports scanning and parsing various ID card and driver’s license formats.</p>
+</div>
+<div class="section" id="id-cards-us-driving-license">
+<h2>Id cards/US Driving License<a class="headerlink" href="#id-cards-us-driving-license" title="Permalink to this headline">#</a></h2>
+<div class="section" id="fields">
+<h3>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">#</a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 55%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Data Element ID</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Parsed Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>address</p></td>
+<td><p>The address of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>dateOfBirth</p></td>
+<td><p>The date of birth of the document holder.</p></td>
+<td><p>Dictionary with these key/value pairs:</p>
+<ul class="simple">
+<li><p>‘year’ : YYYY,</p></li>
+<li><p>‘month’: MM,</p></li>
+<li><p>‘day’ : DD</p></li>
+</ul>
+<p>. Can be null.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>dateOfIssue</p></td>
+<td><p>The date of issue of the document.</p></td>
+<td><p>Dictionary with these key/value pairs:</p>
+<ul class="simple">
+<li><p>‘year’ : YYYY,</p></li>
+<li><p>‘month’: MM,</p></li>
+<li><p>‘day’ : DD</p></li>
+</ul>
+<p>. Can be null.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>dateOfExpiry</p></td>
+<td><p>The date of expiry of the document.</p></td>
+<td><p>Dictionary with these key/value pairs:</p>
+<ul class="simple">
+<li><p>‘year’ : YYYY,</p></li>
+<li><p>‘month’: MM,</p></li>
+<li><p>‘day’ : DD</p></li>
+</ul>
+<p>. Can be null.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>documentNumber</p></td>
+<td><p>The document number.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>firstName</p></td>
+<td><p>The first name of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>fullName</p></td>
+<td><p>The full name of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>lastName</p></td>
+<td><p>The last name of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>sex</p></td>
+<td><p>The sex of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>additionalNameInformation</p></td>
+<td><p>The additional name information of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>additionalAddressInformation</p></td>
+<td><p>The additional name information of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>placeOfBirth</p></td>
+<td><p>The place of birth of the document holder</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>nationality</p></td>
+<td><p>The nationality of the documet holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>race</p></td>
+<td><p>The race of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>religion</p></td>
+<td><p>The religion of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>profession</p></td>
+<td><p>The profession of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>maritalStatus</p></td>
+<td><p>The marital status of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>residentialStatus</p></td>
+<td><p>The residential stauts of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>employer</p></td>
+<td><p>The employer of the document holder.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>personalIdNumber</p></td>
+<td><p>The personal identification number</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>documentAdditionalNumber</p></td>
+<td><p>The additional number of the document.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-odd"><td><p>issuingAuthority</p></td>
+<td><p>The issuing authority of the document.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+<tr class="row-even"><td><p>mrzResult</p></td>
+<td><p>Represents data extracted from MRZ (Machine Readable Zone) of Machine Readable Travel Document (MRTD).</p></td>
+<td><p>Dictionary with key/value pairs. See table below</p></td>
+</tr>
+<tr class="row-odd"><td><p>driverLicenseDetailedInfo</p></td>
+<td><p>The driver license detailed info.</p></td>
+<td><p>Dictionary with these key/value pairs:</p>
+<ul class="simple">
+<li><p>‘restrictions’ : string. The restrictions to driving privileges for the driver license holder.</p></li>
+<li><p>‘endorsements’: string. The additional privileges granted to the driver license holder.</p></li>
+<li><p>‘vehicleClass’ : string. The type of vehicle the driver license holder has privilege to drive.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>conditions</p></td>
+<td><p>The driver license conditions.</p></td>
+<td><p>String. Can be null.</p></td>
+</tr>
+</tbody>
+</table>
+<p>with YYYY (0 if date is not recognized or missing), MM (in range 1 (January)-12 (December), 0 if date is partial and month is not recognized or missing), DD (day of the month. 0 if date is partial and day is not recognized or missing) as integers. Entries are omitted from the dictionary if they are not specified by the input.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 55%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Data Element ID</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Parsed Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>documentType</p></td>
+<td><p>MRTD document type of recognized document.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>primaryID</p></td>
+<td><p>The primary identifier.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>secondaryID</p></td>
+<td><p>The secondary identifier.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>issuer</p></td>
+<td><p>Three-letter or two-letter code which indicate the issuing State. Three-letter codes are based on Aplha-3 codes for entities specified in ISO 3166-1 with extensions for certain States. Two-letter codes are based on Aplha-2 codes for entities specified in ISO 3166-1 with extensions for certain States.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>dateOfBirth</p></td>
+<td><p>Holder’s date of birth.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>documentNumber</p></td>
+<td><p>Document number. Document number contains up to 9 characters. Element does not exist on US Green Card.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>nationality</p></td>
+<td><p>Nationality of the holder represented by a three-letter or two-letter code. Three-letter codes are based on Alpha-3 codes for entities specified in ISO 3166-1 with extensions for certain States. Two-letter codes are based on Aplha-2 codes for entities specified in ISO 3166-1 with extensions for certain States.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>gender</p></td>
+<td><p>Gender of the card holder. Gender is specified by use of the single initial capital letter F for female, M for male or &lt; for unspecified.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>documentCode</p></td>
+<td><p>Document code. Document code contains two characters. For MRTD the first character shall be A, C or I. The second character shall be discretion of the issuing State or organization except that V shall not be used, and <cite>C</cite> shall not be used after <cite>A</cite> except in the crew member certificate. On machine-readable passports (MRP) first character shall be <cite>P</cite> to designate an MRP. One additional letter may be used, at the discretion of the issuing State or organization, to designate a particular MRP. If the second character position is not used for this purpose, it shall be filled by the filter character &lt;.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>dateOfExpiry</p></td>
+<td><p>Date of expiry.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>opt1</p></td>
+<td><p>First optional data. Returns empty string if not available. Element does not exist on US Green Card.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>opt2</p></td>
+<td><p>Second optional data. Returns empty string if not available. Element does not exist on Passports and Visas.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>alienNumber</p></td>
+<td><p>Alien number. Returns empty string if not available. Exists only on US Green Cards.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>applicationReceiptNumber</p></td>
+<td><p>Application receipt number. Returns empty string if not available. Exists only on US Green Cards.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>immigrantCaseNumber</p></td>
+<td><p>Immigrant case number. Returns empty string if not available. Exists only on US Green Cards.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>mrzText</p></td>
+<td><p>The entire Machine Readable Zone text from ID. This text is usually used for parsing other elements. NOTE: This string is available only if OCR result was parsed successfully.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>isParsed</p></td>
+<td><p>True if Machine Readable Zone has been parsed, false otherwise.</p></td>
+<td><p>Bool.</p></td>
+</tr>
+<tr class="row-odd"><td><p>isVerified</p></td>
+<td><p>True if all check digits inside MRZ are correct, false otherwise.</p></td>
+<td><p>Bool.</p></td>
+</tr>
+<tr class="row-even"><td><p>sanitizedOpt1</p></td>
+<td><p>opt1 field, but without additional ‘&lt;’ characters if they exist.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sanitizedOpt2</p></td>
+<td><p>opt2 field, but without additional ‘&lt;’ characters if they exist.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-even"><td><p>sanitizedNationality</p></td>
+<td><p>Nationality, but without additional ‘&lt;’ characters if they exist.</p></td>
+<td><p>String.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sanitizedIssuer</p></td>
+<td><p>Issuer, but without additional ‘&lt;’ characters if they exist.</p></td>
+<td><p>String.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Scandit AG
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-23556890-7', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

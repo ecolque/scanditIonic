@@ -1,0 +1,63 @@
+Torch Switch Control
+====================
+
+.. module:: scandit.datacapture.core.ui
+  :android-package: com.scandit.datacapture.core.ui.control
+
+.. class:: TorchSwitchControl : IControl
+  @objc@ SDCTorchSwitchControl : NSObject <SDCControl>
+  :available: android=6.0, ios=6.0, xamarin=6.2
+
+  Control that allows to toggle the torch on an off. The torch switch control hides itself automatically in case the active frame source doesn't have a torch.
+
+  You can add this control to a view by calling :meth:`DataCaptureView.AddControl`.
+
+  .. method:: TorchSwitchControl(Context context)
+    @xamarin.ios#csharp@ TorchSwitchControl()
+    :available: android=6.0, xamarin=6.2
+
+    Constructor.
+
+  .. property:: Bitmap TorchOffImage { get; set; }
+    @objc@ @property (nonatomic, strong, nonnull) UIImage *torchOffImage;
+    :available: ios=6.2, xamarin.ios=6.2
+
+    Sets the image to use for the control button when the torch is off.
+
+  .. property:: Bitmap TorchOffPressedImage { get; set; }
+    @objc@ @property (nonatomic, strong, nonnull) UIImage *torchOffPressedImage;
+    :available: ios=6.2, xamarin.ios=6.2
+
+    Sets the image to use for the control button when the torch is off and the button is pressed.
+
+  .. property:: Bitmap TorchOnImage { get; set; }
+    @objc@ @property (nonatomic, strong, nonnull) UIImage *torchOnImage;
+    :available: ios=6.2, xamarin.ios=6.2
+
+    Sets the image to use for the control button when the torch is on.
+
+  .. property:: Bitmap TorchOnPressedImage { get; set; }
+    @objc@ @property (nonatomic, strong, nonnull) UIImage *torchOnPressedImage;
+    :available: ios=6.2, xamarin.ios=6.2
+
+    Sets the image to use for the control button when the torch is on and the button is pressed.
+
+  .. method:: void SetImageResource(int resId)
+    :available: android=6.2, xamarin.android=6.2
+
+    Sets a drawable to use as the image of this control.
+
+    Use XML drawable "selector" to indicate different states of this control. This control is
+    considered "checked" when the torch is on. For example, this is a "selector" you may use
+    to display different images when the torch is on and off:
+
+    .. code-block:: xml
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:drawable="@drawable/torch_on_icon"
+                android:state_checked="true" />
+            <item android:drawable="@drawable/torch_off_icon" />
+        </selector>
+
+
